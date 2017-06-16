@@ -1,3 +1,8 @@
+html, body{
+    height: 100%;
+    width: 100%;
+}
+
 .header{
     display: block;
     position: fixed;
@@ -5,13 +10,98 @@
     left: 0;
     width: 100%;
     z-index: 1000;
-    height: 60px;
-    background-color: rgba(0,0,0, .8);
+    height: 4rem;
+    background-color: rgba(255,255,255, .9);
+    border-bottom: 1px solid #ccc;
+}
+
+.screens{
+    display: block;
+    position: absolute;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.screen{
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+
+/*screen 1 */
+.screen-1{
+    background-image: url('../images/main-background.jpg');
+}
+
+.screen-1__title{
+    display: block;
+    position: absolute;
+    width: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.screen-1__title_main{
+    top: calc(50% - 10rem);
+    font-size: 8rem;
+    font-weight: bold;
+}
+
+.screen-1__title_sub{
+    top: calc(50% - 3rem);
+    font-size: 1.8rem;
+    font-weight: 100;
 }
 
 
 
+.screen-1__buttons{
+    display: block;
+    position: absolute;
+    top: calc(50% - 0rem);
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: auto;
+    width: auto;
+}
 
+
+
+.screen-1__button{
+    display: inline-block;
+    position: relative;
+    height: 2.5rem;
+    line-height: 2.3rem;
+    text-align: center;
+    font-size: 1rem;
+    background-color: transparent;
+    border: 2px solid #555;
+    color: #555;
+    cursor: pointer;
+    border-radius: .5rem;
+    transition: .2s all;
+    margin-right: 2rem;
+    width: 12rem;
+}
+
+.screen-1__button:last-of-type{
+    margin-right: 0;
+}
+
+.screen-1__button:hover {
+    border: 2px solid #000;
+    color: #000;
+}
 
 
 
