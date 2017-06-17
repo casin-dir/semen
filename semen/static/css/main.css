@@ -112,7 +112,7 @@ html, body{
     background-color: #eee;
 }
 
-#device__iphone{
+/*#device__iphone{
     background-image: url('../images/iphone.png');
 }
 
@@ -122,7 +122,7 @@ html, body{
 
 #device__macbook{
     background-image: url('../images/macbook.png');
-}
+}*/
 
 .screen-2__devices-types{
     display: block;
