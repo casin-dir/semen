@@ -45,27 +45,51 @@
 
     <!-- screen 2 -->
     <div class="screen screen-2">
-
+        <h3 class="screen-2__title">Выберете устройство</h3>
         <div class="screen-2__devices-types">
             {% for item in list %}
                 <div class="screen-2__device-type">
-                    <div class="screen-2__device-img"
+                    <div class="screen-2__device-type-img"
                          style="background-image: url('{{ prepath }}/{{ item.type }}.png')"
                          id="device__iphone"></div>
-                    <div class="screen-2__device-name">{{ item.type }}</div>
+                    <div class="screen-2__device-type-name">{{ item.type }}</div>
                 </div>
             {% endfor %}
         </div>
 
+    
+
+        <div class="screen-2__devices-names">
+            <div class="screen-2__device-name">iPhone 4</div>
+            <div class="screen-2__device-name">iPhone 4S</div>
+            <div class="screen-2__device-name">iPhone 5</div>
+            <div class="screen-2__device-name">iPhone 5S</div>
+            <div class="screen-2__device-name">iPhone 6</div>
+            <div class="screen-2__device-name">iPhone 6S</div>
+            <div class="screen-2__device-name">iPhone 7</div>
+            <div class="screen-2__device-name">iPhone 7 Plus</div>
+        </div>
+        
 
     </div>
 
 
     <div class="screen screen-3">
-        Screen 3
+        {% for item in list %}
+            {% for device in item.models %}
+                {{ device.name }}
+            {% endfor %}
+        {% endfor %}
     </div>
     <div class="screen screen-4">
-        Screen 4
+        {% for item in list %}
+            {% for device in item.models %}
+                {% for crash in device.crashes %}
+                    {{ crash.name }}
+                    {{ crash.id }}
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
     </div>
     <div class="screen screen-5">
         Screen 5
