@@ -112,18 +112,6 @@ html, body{
     background-color: #eee;
 }
 
-/*#device__iphone{
-    background-image: url('../images/iphone.png');
-}
-
-#device__ipad{
-    background-image: url('../images/ipad.png');
-}
-
-#device__macbook{
-    background-image: url('../images/macbook.png');
-}*/
-
 .screen-2__devices-types{
     display: block;
     position: absolute;
@@ -139,7 +127,6 @@ html, body{
     position: relative;
     width: 15rem;
     height: 20rem;
-    background-color: yellow;
     margin-right: 3rem;
     border: 1px solid #ccc;
     border-radius: 1rem;
@@ -147,6 +134,7 @@ html, body{
     cursor: pointer;
     transition: .2s all;
     overflow: hidden;
+    float: left;
 }
 
 .screen-2__device-type:last-of-type{

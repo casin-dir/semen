@@ -1,4 +1,6 @@
 {% load static %}
+{% load staticfiles %}
+{% static "images/devices_types" as prepath %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,87 +12,74 @@
 </head>
 <body>
 
-    <header class="header">
-        
-        <div class="header__logo"></div>
-        <div class="header__name"></div>
+<header class="header">
 
-    </header>
+    <div class="header__logo"></div>
+    <div class="header__name"></div>
 
-
-    <div class="screens">
+</header>
 
 
+<div class="screens">
 
 
+    <!-- screen 1 -->
+    <div class="screen screen-1">
+        <h1 class="screen-1__title screen-1__title_main">Good Master</h1>
+        <h2 class="screen-1__title screen-1__title_sub">Быстрый и качетсвенный ремонт техники Apple</h2>
 
-        <!-- screen 1 -->
-        <div class="screen screen-1">
-            <h1 class="screen-1__title screen-1__title_main">Good Master</h1>
-            <h2 class="screen-1__title screen-1__title_sub">Быстрый и качетсвенный ремонт техники Apple</h2>
-
-            <div class="screen-1__buttons">
-                <div class="
+        <div class="screen-1__buttons">
+            <div class="
                 screen-1__button
                 screen-1__button_сallback">
-                    Заказать звонок
-                </div>
-                <div class="
+                Заказать звонок
+            </div>
+            <div class="
                 screen-1__button
                 screen-1__button_сalculate-cost">
-                    Рассчитать стоимость
-                </div>
+                Рассчитать стоимость
             </div>
-        </div>
-
-
-
-
-        <!-- screen 2 -->
-        <div class="screen screen-2">
-            
-
-            <div class="screen-2__devices-types">
-                <div class="screen-2__device-type">
-                    <div class="screen-2__device-img" id="device__iphone"></div>
-                    <div class="screen-2__device-name">iPhone</div>
-                </div><!--
-             --><div class="screen-2__device-type">
-                    <div class="screen-2__device-img" id="device__ipad"></div>
-                    <div class="screen-2__device-name">iPad</div>
-                </div><!--
-             --><div class="screen-2__device-type">
-                    <div class="screen-2__device-img" id="device__macbook"></div>
-                    <div class="screen-2__device-name">Mac</div>
-                </div>
-            </div>
-
-
-        </div>
-
-
-
-
-
-        <div class="screen screen-3">
-            Screen 3
-        </div>
-        <div class="screen screen-4">
-            Screen 4
-        </div>
-        <div class="screen screen-5">
-            Screen 5
         </div>
     </div>
 
 
-    <footer class="footer">
-        Footer here!
-    </footer>
+    <!-- screen 2 -->
+    <div class="screen screen-2">
+
+        <div class="screen-2__devices-types">
+            {% for item in list %}
+                <div class="screen-2__device-type">
+                    <div class="screen-2__device-img"
+                         style="background-image: url('{{ prepath }}/{{ item.type }}.png')"
+                         id="device__iphone"></div>
+                    <div class="screen-2__device-name">{{ item.type }}</div>
+                </div>
+            {% endfor %}
+        </div>
 
 
-    <div class="modal-window">Modal here</div>
+    </div>
 
-    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+
+    <div class="screen screen-3">
+        Screen 3
+    </div>
+    <div class="screen screen-4">
+        Screen 4
+    </div>
+    <div class="screen screen-5">
+        Screen 5
+    </div>
+</div>
+
+
+<footer class="footer">
+    Footer here!
+</footer>
+
+
+<div class="modal-window">Modal here</div>
+
+<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
 </body>
 </html>

@@ -16,6 +16,7 @@ class Crash(Model):
     rps = models.ManyToManyField(RepairParts,blank=True, verbose_name=u'Поломки')
     percent_cost = models.IntegerField(default=0,verbose_name='Процент работы')
     abs_cost = models.IntegerField(default=0,verbose_name='Стоимость работы')
+    url = models.CharField(max_length=255, default=None, blank=True, verbose_name=u'Картинка')
 
     def __str__(self):
         return '%s' % (self.name)
