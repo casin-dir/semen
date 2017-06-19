@@ -45,30 +45,102 @@
 
     <!-- screen 2 -->
     <div class="screen screen-2">
-        <h3 class="screen-2__title">Выберете устройство</h3>
-        <div class="screen-2__devices-types">
-            {% for item in list %}
-                <div class="screen-2__device-type">
-                    <div class="screen-2__device-type-img"
-                         style="background-image: url('{{ prepath }}/{{ item.type }}.png')"
-                         id="device__iphone"></div>
-                    <div class="screen-2__device-type-name">{{ item.type }}</div>
-                </div>
-            {% endfor %}
+
+
+        <div class="screen-2__step screen-2__step_1">
+            <h3 class="screen-2__step-title">Выбери устройство</h3>
+            <div class="screen-2__devices-types">
+                {% for item in list %}
+                    <div class="screen-2__device-type">
+                        <div class="screen-2__device-type-img"
+                             style="background-image: url('{{ prepath }}/{{ item.type }}.png')"
+                             id="device__iphone"></div>
+                        <div class="screen-2__device-type-name">{{ item.type }}</div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
 
     
-
-        <div class="screen-2__devices-names">
-            <div class="screen-2__device-name">iPhone 4</div>
-            <div class="screen-2__device-name">iPhone 4S</div>
-            <div class="screen-2__device-name">iPhone 5</div>
-            <div class="screen-2__device-name">iPhone 5S</div>
-            <div class="screen-2__device-name">iPhone 6</div>
-            <div class="screen-2__device-name">iPhone 6S</div>
-            <div class="screen-2__device-name">iPhone 7</div>
-            <div class="screen-2__device-name">iPhone 7 Plus</div>
+        <div class="screen-2__step screen-2__step_2">
+            <h3 class="screen-2__step-title">Выбери модель</h3>
+            <div class="screen-2__devices-names">
+                <div class="screen-2__device-name">iPhone 4</div>
+                <div class="screen-2__device-name">iPhone 4S</div>
+                <div class="screen-2__device-name">iPhone 5</div>
+                <div class="screen-2__device-name">iPhone 5S</div>
+                <div class="screen-2__device-name">iPhone 6</div>
+                <div class="screen-2__device-name">iPhone 6S</div>
+                <div class="screen-2__device-name">iPhone 7</div>
+                <div class="screen-2__device-name">iPhone 7 Plus</div>
+            </div>
         </div>
+
+        <div class="screen-2__step screen-2__step_3">
+            <h3 class="screen-2__step-title">Что сломалось</h3>
+            <div class="screen-2__crashes-names">
+
+                <div class="screen-2__crash">
+                    <div class="screen-2__crash-icon"></div>
+                    <div class="screen-2__crash-name">
+                        Экран
+                        <span class="screen-2__crash-cost">3900 ₽</span>
+                    </div>
+                    <div class="screen-2__crash-check"></div>
+                </div>
+
+                <div class="screen-2__crash">
+                    <div class="screen-2__crash-icon"></div>
+                    <div class="screen-2__crash-name">Аккумулятор</div>
+                    <div class="screen-2__crash-check"></div>
+                </div>
+
+                <div class="screen-2__crash">
+                    <div class="screen-2__crash-icon"></div>
+                    <div class="screen-2__crash-name">Кнопка</div>
+                    <div class="screen-2__crash-check"></div>
+                </div>
+
+                <div class="screen-2__crash">
+                    <div class="screen-2__crash-icon"></div>
+                    <div class="screen-2__crash-name">Плохо заряжается</div>
+                </div>
+
+                <div class="screen-2__crash">
+                    <div class="screen-2__crash-icon"></div>
+                    <div class="screen-2__crash-name">Корпус</div>
+                </div>
+                <div class="screen-2__crash">
+                    <div class="screen-2__crash-icon"></div>
+                    <div class="screen-2__crash-name">Корпус</div>
+                </div>
+                <div class="screen-2__crash">
+                    <div class="screen-2__crash-icon"></div>
+                    <div class="screen-2__crash-name">Корпус</div>
+                </div>
+                <div class="screen-2__crash">
+                    <div class="screen-2__crash-icon"></div>
+                    <div class="screen-2__crash-name">Корпус</div>
+                </div>
+                <div class="screen-2__crash">
+                    <div class="screen-2__crash-icon"></div>
+                    <div class="screen-2__crash-name">Корпус</div>
+                </div>
+
+            </div>
+            <div class="screen-2__crashes-selected">Готово</div>
+        </div>
+
+
+        <div class="screen-2__map">
+            <h3 class="screen-2__step-title">Где вы находитесь</h3>
+        </div>
+
+        <div class="screen-2__order">
+            <h3 class="screen-2__step-title">Контактные данные</h3>
+        </div>
+
+
         
 
     </div>
