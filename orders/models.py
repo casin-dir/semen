@@ -27,3 +27,6 @@ class Order(Model):
     travel_time = models.IntegerField(default=0,verbose_name=u'Приблизительное время поезки(в минутах)')
     total_cost = models.IntegerField(verbose_name='Общая сумма заказа')
     status = models.CharField(max_length=100,default='NEW',choices=STATUS,verbose_name='Статус')
+
+    def get_crashes(self):
+        return ", ".join([str(cr) for cr in self.crashes.all()])
