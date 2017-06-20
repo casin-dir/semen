@@ -20,3 +20,54 @@ function ready() {
 };
 
 document.addEventListener("DOMContentLoaded", ready);
+
+
+
+
+
+/////////////
+function sendTestData(){
+    var clientName = document.getElementById('test-name').value;
+    var clientPhone = document.getElementById('test-phone').value;
+    var clientAddress = document.getElementById('test-addres').value;
+    var clientCrashes = document.getElementById('test-crashes').value.split(' ');
+
+
+    console.log(clientName);
+    console.log(clientPhone);
+    console.log(clientAddress);
+    console.log(clientCrashes);
+
+    var xhr = new XMLHttpRequest();
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.open('POST', '/order');
+    xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+    xhr.timeout = 10000;
+    xhr.send(JSON.stringify({
+        name: clientName,
+        phone: clientPhone,
+        address: clientAddress,
+        crashes: clientCrashes
+    }));
+
+    xhr.onreadystatechange = function() { // (3)
+      if (xhr.readyState != 4) return;
+
+      if (xhr.status != 200) {
+        alert(xhr.status + ': ' + xhr.statusText);
+      } else {
+        alert(xhr.responseText);
+      }
+    }
+
+    xhr.ontimeout = function(){
+        alert('timeout')
+    }
+}
+
+
+document.getElementById('test-send').addEventListener('click', function(){
+    sendTestData();
+});

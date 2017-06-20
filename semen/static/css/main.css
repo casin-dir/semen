@@ -3,6 +3,24 @@ html, body{
     width: 100%;
 }
 
+.text-input{
+    display: inline-block;
+    border: 1px solid #ccc;
+    width: 15rem;
+    border-radius: .5rem;
+    height: 2.3rem;
+    padding-left: 1rem;
+    font-size: 1rem;
+    background-color: transparent;
+    line-height: 2.3rem;
+    color: #222;
+    transition: .2s all;
+}
+
+.text-input:focus{
+    border: 1px solid #0070c9;
+}
+
 .header{
     display: block;
     position: fixed;
@@ -143,7 +161,8 @@ html, body{
 
 .screen-2__devices-types,
 .screen-2__devices-names,
-.screen-2__crashes-names{
+.screen-2__crashes-names,
+.screen-2__order-form{
     display: inline-block;
     position: relative;
     margin: 2rem auto;
@@ -162,6 +181,11 @@ html, body{
     text-align: center;
     width: 55rem;
     margin-bottom: calc(2rem - 2.5rem);
+    left: 1rem;
+}
+
+.screen-2__order-form{
+    /*background-color: red;*/
 }
 
 
@@ -300,13 +324,14 @@ html, body{
 }
 
 
-.screen-2__crash:hover{
+.screen-2__crash:hover,
+.screen-2__crash_selected{
     background-color: #fff;
 }
 
 .screen-2__crashes-selected{
     display: block;
-    width: 8rem;
+    width: 7rem;
     height: 2rem;
     line-height: 2rem;
     margin: 0 auto;
@@ -324,6 +349,63 @@ html, body{
     background-color: #0070c9;
     color: #fff;
 }
+
+.screen-2__crash-check{
+    display: block;
+    position: absolute;
+    top: .5rem;
+    right: .5rem;
+    height: 1rem;
+    width: 1rem;
+    background-image: url('../icons/check-icon.svg');
+    background-position: center;
+    background-size: 80%;
+    background-repeat: no-repeat;
+}
+
+.screen-2__crash > .screen-2__crash-check{
+    opacity: 0;
+}
+
+.screen-2__crash:hover > .screen-2__crash-check{
+    opacity: .5;
+}
+
+.screen-2__crash:active > .screen-2__crash-check,
+.screen-2__crash.screen-2__crash_selected > .screen-2__crash-check{
+    opacity: 1;
+}
+
+#map{
+    height: 30rem;
+    background-color: #fff;
+    margin-top: 2rem;
+}
+
+
+
+
+/*//////////////*/
+#test-name,
+#test-phone,
+#test-addres,
+#test-crashes{
+    margin-left: 50px;
+    border: 1px solid #000;
+    display: block;
+    width: 500px;
+    margin-bottom: 15px;
+}
+
+#test-send{
+    display: inline-block;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    margin-left: 50px;
+}
+
+
+
 
 
 

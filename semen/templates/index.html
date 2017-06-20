@@ -12,12 +12,12 @@
 </head>
 <body>
 
-<header class="header">
+<!-- <header class="header">
 
     <div class="header__logo"></div>
     <div class="header__name"></div>
 
-</header>
+</header> -->
 
 
 <div class="screens">
@@ -80,7 +80,7 @@
             <h3 class="screen-2__step-title">Что сломалось</h3>
             <div class="screen-2__crashes-names">
 
-                <div class="screen-2__crash">
+                <div class="screen-2__crash screen-2__crash_selected">
                     <div class="screen-2__crash-icon"></div>
                     <div class="screen-2__crash-name">
                         Экран
@@ -91,53 +91,120 @@
 
                 <div class="screen-2__crash">
                     <div class="screen-2__crash-icon"></div>
-                    <div class="screen-2__crash-name">Аккумулятор</div>
+                    <div class="screen-2__crash-name">
+                        Разбит экран
+                        <span class="screen-2__crash-cost">3900 ₽</span>
+                    </div>
                     <div class="screen-2__crash-check"></div>
                 </div>
 
                 <div class="screen-2__crash">
                     <div class="screen-2__crash-icon"></div>
-                    <div class="screen-2__crash-name">Кнопка</div>
+                    <div class="screen-2__crash-name">
+                        Разбит экран
+                        <span class="screen-2__crash-cost">3900 ₽</span>
+                    </div>
+                    <div class="screen-2__crash-check"></div>
+                </div>
+
+                <div class="screen-2__crash screen-2__crash_selected">
+                    <div class="screen-2__crash-icon"></div>
+                    <div class="screen-2__crash-name">
+                        Экран
+                        <span class="screen-2__crash-cost">3900 ₽</span>
+                    </div>
+                    <div class="screen-2__crash-check"></div>
+                </div>
+
+                <div class="screen-2__crash screen-2__crash_selected">
+                    <div class="screen-2__crash-icon"></div>
+                    <div class="screen-2__crash-name">
+                        Экран
+                        <span class="screen-2__crash-cost">3900 ₽</span>
+                    </div>
                     <div class="screen-2__crash-check"></div>
                 </div>
 
                 <div class="screen-2__crash">
                     <div class="screen-2__crash-icon"></div>
-                    <div class="screen-2__crash-name">Плохо заряжается</div>
+                    <div class="screen-2__crash-name">
+                        Разбит экран
+                        <span class="screen-2__crash-cost">3900 ₽</span>
+                    </div>
+                    <div class="screen-2__crash-check"></div>
                 </div>
 
                 <div class="screen-2__crash">
                     <div class="screen-2__crash-icon"></div>
-                    <div class="screen-2__crash-name">Корпус</div>
+                    <div class="screen-2__crash-name">
+                        Разбит экран
+                        <span class="screen-2__crash-cost">3900 ₽</span>
+                    </div>
+                    <div class="screen-2__crash-check"></div>
                 </div>
+
+                <div class="screen-2__crash screen-2__crash_selected">
+                    <div class="screen-2__crash-icon"></div>
+                    <div class="screen-2__crash-name">
+                        Экран
+                        <span class="screen-2__crash-cost">3900 ₽</span>
+                    </div>
+                    <div class="screen-2__crash-check"></div>
+                </div>
+
                 <div class="screen-2__crash">
                     <div class="screen-2__crash-icon"></div>
-                    <div class="screen-2__crash-name">Корпус</div>
+                    <div class="screen-2__crash-name">
+                        Разбит экран
+                        <span class="screen-2__crash-cost">3900 ₽</span>
+                    </div>
+                    <div class="screen-2__crash-check"></div>
                 </div>
+
                 <div class="screen-2__crash">
                     <div class="screen-2__crash-icon"></div>
-                    <div class="screen-2__crash-name">Корпус</div>
-                </div>
-                <div class="screen-2__crash">
-                    <div class="screen-2__crash-icon"></div>
-                    <div class="screen-2__crash-name">Корпус</div>
-                </div>
-                <div class="screen-2__crash">
-                    <div class="screen-2__crash-icon"></div>
-                    <div class="screen-2__crash-name">Корпус</div>
+                    <div class="screen-2__crash-name">
+                        Разбит экран
+                        <span class="screen-2__crash-cost">3900 ₽</span>
+                    </div>
+                    <div class="screen-2__crash-check"></div>
                 </div>
 
             </div>
-            <div class="screen-2__crashes-selected">Готово</div>
+            <div class="screen-2__crashes-selected button">Готово</div>
         </div>
 
 
         <div class="screen-2__map">
             <h3 class="screen-2__step-title">Где вы находитесь</h3>
+            <div id="map"></div>
         </div>
 
         <div class="screen-2__order">
             <h3 class="screen-2__step-title">Контактные данные</h3>
+            <div class="screen-2__order-form">
+
+
+                <p class="screen-2__order-description">
+                    Наш мастер перезвонит Вам в течение часа. Точная сумма заказа
+                    <span class="blue-text">9700 ₽</span>, ремонт займет не более 
+                    <span class="blue-text">45 минут.</span>
+                </p>
+
+
+                <span id="total-cost">9700 ₽</span>
+                <span id="total-time"></span>
+                <br>
+
+                <label for="client-name">Как к вам обращаться</label>
+                <br>
+                <input id="client-name" class="text-input screen-2__client-name" type="text">
+                <br>
+                <label for="client-phone">Контактный телефон</label>
+                <br>
+                <input id="client-phone" class="text-input screen-2__client-phone" type="text">
+                <div class="button">Вызвать мастера</div>
+            </div>
         </div>
 
 
@@ -164,13 +231,17 @@
         {% endfor %}
     </div>
     <div class="screen screen-5">
-        Screen 5
+        <input type="text" id="test-name" placeholder="name">
+        <input type="text" id="test-phone" placeholder="phone">
+        <input type="text" id="test-addres" placeholder="address">
+        <input type="text" id="test-crashes" placeholder="crash,crash">
+        <div id="test-send">Send</div>
     </div>
 </div>
 
 
 <footer class="footer">
-    Footer here!
+    {% csrf_token %}
 </footer>
 
 
