@@ -93,12 +93,13 @@ function sendTestData(){
     xhr.open('POST', '/order');
     xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
     xhr.timeout = 10000;
+    xhr.setRequestHeader("X-CSRFToken", csrfToken);
+
     xhr.send(JSON.stringify({
         name: clientName,
         phone: clientPhone,
         address: clientAddress,
-        crashes: clientCrashes,
-        csrfmiddlewaretoken: csrfToken
+        crashes: clientCrashes
     }));
 
     xhr.onreadystatechange = function() { // (3)
