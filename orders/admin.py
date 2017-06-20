@@ -4,11 +4,9 @@ from orders.models import Order
 
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('device', 'crashes_str', 'date', 'address', 'phone', 'name', 'travel_time','total_cost','status')
+    list_display = ('id','device', 'get_crashes', 'date', 'address', 'phone', 'name', 'travel_time','total_cost','status')
     list_filter = ('date',)
 
-    def crashes_str(self, obj):
-        return 'ХУЙ'
 
 
 
