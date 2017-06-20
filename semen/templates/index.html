@@ -29,12 +29,12 @@
         <h2 class="screen-1__title screen-1__title_sub">Быстрый и качетсвенный ремонт техники Apple</h2>
 
         <div class="screen-1__buttons">
-            <div class="
+            <div id="" class="
                 screen-1__button
                 screen-1__button_сallback">
                 Заказать звонок
             </div>
-            <div class="
+            <div id="calculate-cost" class="
                 screen-1__button
                 screen-1__button_сalculate-cost">
                 Рассчитать стоимость
@@ -44,18 +44,25 @@
 
 
     <!-- screen 2 -->
-    <div class="screen screen-2">
+    <div class="screen screen-2" id="calculating">
 
 
-        <div class="screen-2__step screen-2__step_1">
+        <div class="screen-2__step screen-2__step_1 screen-2__step_visible">
             <h3 class="screen-2__step-title">Выбери устройство</h3>
             <div class="screen-2__devices-types">
                 {% for item in list %}
-                    <div class="screen-2__device-type">
-                        <div class="screen-2__device-type-img"
-                             style="background-image: url('{{ prepath }}/{{ item.type }}.png')"
-                             id="device__iphone"></div>
-                        <div class="screen-2__device-type-name">{{ item.type }}</div>
+                    <div 
+                        class="screen-2__device-type" 
+                        device-type-btn="{{ item.type.id }}"
+                    >
+                        <div 
+                            class="screen-2__device-type-img"
+                            style="background-image: url('{{ prepath }}/{{ item.type }}.png')"
+                            id="device__iphone"
+                        ></div>
+                        <div class="screen-2__device-type-name">
+                            {{ item.type }}
+                        </div>
                     </div>
                 {% endfor %}
             </div>
@@ -64,6 +71,24 @@
     
         <div class="screen-2__step screen-2__step_2">
             <h3 class="screen-2__step-title">Выбери модель</h3>
+
+            {% for item in list %}
+                <div   
+                    class="screen-2__devices-names" 
+                    device-type-id="{{ item.type.id }}"
+                >
+                    {% for device in item.models %}
+                        <div 
+                            class="screen-2__device-name" 
+                            device-name-btn="{{ device.id }}"
+                        >
+                            {{ device.name }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+
             <div class="screen-2__devices-names">
                 <div class="screen-2__device-name">iPhone 4</div>
                 <div class="screen-2__device-name">iPhone 4S</div>
@@ -190,21 +215,25 @@
             <div class="screen-2__order-form">
 
 
-                <p class="screen-2__order-description _selectable">
-                    Наш мастер перезвонит Вам в течение часа. Точная сумма заказа
-                    <span class="blue-text _selectable">9700 ₽</span>, ремонт займет не более 
-                    <span class="blue-text _selectable">45 минут</span>.
-                </p>
+            <p class="screen-2__order-description _selectable">
+                Наш мастер перезвонит Вам в течение часа. Точная сумма заказа
+                <span class="blue-text _selectable">9700 ₽</span>, ремонт займет не более 
+                <span class="blue-text _selectable">45 минут</span>.
+            </p>
 
 
-                <label for="client-name">Как к вам обращаться</label>
-                <br>
-                <input id="client-name" class="text-input screen-2__client-name" type="text">
-                <br>
-                <label for="client-phone">Контактный телефон</label>
-                <br>
-                <input id="client-phone" class="text-input screen-2__client-phone" type="text">
-                <div class="button">Вызвать мастера</div>
+                <div class="text-input">
+                    <label class="text-input__label" for="client-name">Как Вас зовут</label>
+                    <input id="client-name" type="text" class="text-input__input">
+                </div>
+
+
+                <div class="text-input">
+                    <label class="text-input__label" for="client-phone">Контактный телефон</label>
+                    <input id="client-phone" type="text" class="text-input__input">
+                </div>
+            
+                <div class="button button_blue">Вызвать мастера</div>
             </div>
         </div>
 
