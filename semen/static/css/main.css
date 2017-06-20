@@ -273,7 +273,7 @@ html, body{
 }
 
 .screen-2__device-type:hover{
-    background-color: #fff;
+    background-color: #eee;
     transform: scale(1.03);
 }
 
@@ -288,6 +288,7 @@ html, body{
     background-repeat: no-repeat;
     background-position: center;
     transition: .2s all;
+    cursor: inherit;
 }
 
 .screen-2__device-type > .screen-2__device-type-img{
@@ -307,6 +308,17 @@ html, body{
     left: 0;
     text-align: center;
     font-weight: normal;
+    cursor: inherit;
+}
+
+.screen-2__device-type_selected,
+.screen-2__device-type_selected:hover {
+    background-color: #fff;
+    transform: scale(1.03);
+}
+
+.screen-2__device-type_selected > .screen-2__device-type-img{
+    opacity: 1;
 }
 
 

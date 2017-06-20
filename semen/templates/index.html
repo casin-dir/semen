@@ -87,121 +87,46 @@
                     {% endfor %}
                 </div>
             {% endfor %}
-
-
-            <div class="screen-2__devices-names">
-                <div class="screen-2__device-name">iPhone 4</div>
-                <div class="screen-2__device-name">iPhone 4S</div>
-                <div class="screen-2__device-name">iPhone 5</div>
-                <div class="screen-2__device-name">iPhone 5S</div>
-                <div class="screen-2__device-name">iPhone 6</div>
-                <div class="screen-2__device-name">iPhone 6S</div>
-                <div class="screen-2__device-name">iPhone 7</div>
-                <div class="screen-2__device-name">iPhone 7 Plus</div>
-            </div>
         </div>
 
         <div class="screen-2__step screen-2__step_3">
             <h3 class="screen-2__step-title">Что сломалось</h3>
-            <div class="screen-2__crashes-names">
 
-                <div class="screen-2__crash screen-2__crash_selected">
-                    <div class="screen-2__crash-icon"></div>
-                    <div class="screen-2__crash-name">
-                        Экран
-                        <span class="screen-2__crash-cost">3900 ₽</span>
+
+
+            {% for item in list %}
+                {% for device in item.models %}
+                    <div 
+                        class="screen-2__crashes-names"
+                        device-name-id="{{ device.id }}" 
+                    >
+                        {% for crash in device.crashes %}
+                            <div 
+                                class="screen-2__crash screen-2__crash_selected"
+                                device-crash-btn="{{ crash.id }}"
+                            >
+                                <div class="screen-2__crash-icon"></div>
+                                <div class="screen-2__crash-name">
+                                    {{ crash.name }}
+                                    <span class="screen-2__crash-cost">
+                                        {{ crash.cost }}₽
+                                    </span>
+                                </div>
+                                <div class="screen-2__crash-check"></div>
+                            </div>
+                        {% endfor %}
                     </div>
-                    <div class="screen-2__crash-check"></div>
-                </div>
+                {% endfor %}
+            {% endfor %}
 
-                <div class="screen-2__crash">
-                    <div class="screen-2__crash-icon"></div>
-                    <div class="screen-2__crash-name">
-                        Разбит экран
-                        <span class="screen-2__crash-cost">3900 ₽</span>
-                    </div>
-                    <div class="screen-2__crash-check"></div>
-                </div>
-
-                <div class="screen-2__crash">
-                    <div class="screen-2__crash-icon"></div>
-                    <div class="screen-2__crash-name">
-                        Разбит экран
-                        <span class="screen-2__crash-cost">3900 ₽</span>
-                    </div>
-                    <div class="screen-2__crash-check"></div>
-                </div>
-
-                <div class="screen-2__crash screen-2__crash_selected">
-                    <div class="screen-2__crash-icon"></div>
-                    <div class="screen-2__crash-name">
-                        Экран
-                        <span class="screen-2__crash-cost">3900 ₽</span>
-                    </div>
-                    <div class="screen-2__crash-check"></div>
-                </div>
-
-                <div class="screen-2__crash screen-2__crash_selected">
-                    <div class="screen-2__crash-icon"></div>
-                    <div class="screen-2__crash-name">
-                        Экран
-                        <span class="screen-2__crash-cost">3900 ₽</span>
-                    </div>
-                    <div class="screen-2__crash-check"></div>
-                </div>
-
-                <div class="screen-2__crash">
-                    <div class="screen-2__crash-icon"></div>
-                    <div class="screen-2__crash-name">
-                        Разбит экран
-                        <span class="screen-2__crash-cost">3900 ₽</span>
-                    </div>
-                    <div class="screen-2__crash-check"></div>
-                </div>
-
-                <div class="screen-2__crash">
-                    <div class="screen-2__crash-icon"></div>
-                    <div class="screen-2__crash-name">
-                        Разбит экран
-                        <span class="screen-2__crash-cost">3900 ₽</span>
-                    </div>
-                    <div class="screen-2__crash-check"></div>
-                </div>
-
-                <div class="screen-2__crash screen-2__crash_selected">
-                    <div class="screen-2__crash-icon"></div>
-                    <div class="screen-2__crash-name">
-                        Экран
-                        <span class="screen-2__crash-cost">3900 ₽</span>
-                    </div>
-                    <div class="screen-2__crash-check"></div>
-                </div>
-
-                <div class="screen-2__crash">
-                    <div class="screen-2__crash-icon"></div>
-                    <div class="screen-2__crash-name">
-                        Разбит экран
-                        <span class="screen-2__crash-cost">3900 ₽</span>
-                    </div>
-                    <div class="screen-2__crash-check"></div>
-                </div>
-
-                <div class="screen-2__crash">
-                    <div class="screen-2__crash-icon"></div>
-                    <div class="screen-2__crash-name">
-                        Разбит экран
-                        <span class="screen-2__crash-cost">3900 ₽</span>
-                    </div>
-                    <div class="screen-2__crash-check"></div>
-                </div>
-
-            </div>
             <p class="screen-2__order-description _selectable">
                 Наш мастер перезвонит Вам в течение часа. Точная сумма заказа
                 <span class="blue-text _selectable">9700 ₽</span>, ремонт займет не более 
                 <span class="blue-text _selectable">45 минут</span>.
             </p>
+
             <div class="screen-2__crashes-selected button">Готово</div>
+            
         </div>
 
 

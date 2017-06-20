@@ -24,12 +24,6 @@ var UI = {};
 UI.init = function(){
     var self = this;
 
-    this.showStepClass = 'screen-2__step_visible';
-    this.showDeviceNamesClass = 'screen-2__devices-names_visible';
-
-    this.html = {};
-    this.html.calculateScreen = document.getElementById('calculate-cost');
-
     this.data = {};
 
     this.data.device = {};
@@ -37,20 +31,88 @@ UI.init = function(){
     this.data.device.type = null;
     this.data.device.crashes = null;
 
+    this.showStepClass = 'screen-2__step_visible';
+    this.showDeviceNamesClass = 'screen-2__devices-names_visible';
+    this.activeTypeClass = 'screen-2__device-type_selected';
+
+    this.html = {};
+
+    this.html.currentType = null;
+    this.html.currentName = null;
+    this.html.currentCrashes = [];
+
     this.html.types = document.querySelectorAll('[device-type-btn]');
+    this.html.names = document.querySelectorAll('[device-name-btn]');
+    this.html.crashes = document.querySelectorAll('[device-crash-btn]');
+
+    this.html.calculateScreen = document.getElementById('calculate-cost');
+    this.html.namesContainers = document.querySelectorAll('[device-type-id]');
+    this.html.crashesContainers = document.querySelectorAll('[device-name-id]');
+
     for (var i = 0; i < this.html.types.length; i++) {
         var typeBlock = this.html.types[i];
         typeBlock.addEventListener('click', function(){
-            var typeId = this.getAttribute('device-type-btn');
-            self.onSelectType(typeId);
+            self.onSelectType(this);
+        })
+    }
+
+    for (var i = 0; i < this.html.names.length; i++) {
+        var nameBlock = this.html.names[i];
+        nameBlock.addEventListener('click', function(){
+            var nameId = this.getAttribute('device-name-btn');
+            self.onSelectName(nameId);
+        })
+    }
+
+    for (var i = 0; i < this.html.crashes.length; i++) {
+        var crashBlock = this.html.crashes[i];
+        crashBlock.addEventListener('click', function(){
+            var crashId = this.getAttribute('device-crash-btn');
+            self.onSelectCrash(crashId);
         })
     }
 
 
 }
 
-UI.onSelectType = function(typeId){
-    
+UI.resetCurrentFromStep = function(step){
+    var self = this;
+
+
+    if(this.html.currentName){
+        // this.html.currentName
+        // unselect current name & hide names block
+    }
+
+    if (self.html.currentType) {
+        self.html.currentType.classList.remove(self.activeTypeClass);
+    }
+
+    this.html.currentType = null;
+}
+
+UI.onSelectType = function(typeBlock){
+    var self = this;
+
+    self.resetCurrentFromStep(0);
+
+    self.html.currentType = typeBlock;
+    self.html.currentType.classList.add(self.activeTypeClass);
+
+    self.data.device.type = typeBlock.getAttribute('device-type-btn');
+
+    if (self.html.currentName) {
+
+    }
+
+}
+
+UI.onSelectName = function(nameId){
+    console.log('select name ' + nameId);
+}
+
+UI.onSelectCrash = function(crashId){
+    console.log('select crash ' + crashId);
 }
 
 
