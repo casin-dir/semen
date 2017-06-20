@@ -1,5 +1,7 @@
 // markup
-function fitFontSize() {
+var Markup = {};
+
+Markup.fitFontSize = function() {
     var currentWidth = window.innerWidth;
     var currentHeight = window.innerHeight;
     var initScale = 20;
@@ -10,13 +12,51 @@ function fitFontSize() {
     document.documentElement.style.fontSize = fontSize + 'px';
 }
 
-function initMarkup() {
-  fitFontSize();
-  window.addEventListener('resize', fitFontSize);
+Markup.init = function() {
+  this.fitFontSize();
+  window.addEventListener('resize', this.fitFontSize);
 }
 
+//UI
+
+var UI = {};
+
+UI.init = function(){
+    var self = this;
+
+    this.showStepClass = 'screen-2__step_visible';
+    this.showDeviceNamesClass = 'screen-2__devices-names_visible';
+
+    this.html = {};
+    this.html.calculateScreen = document.getElementById('calculate-cost');
+
+    this.data = {};
+
+    this.data.device = {};
+    this.data.device.name = null;
+    this.data.device.type = null;
+    this.data.device.crashes = null;
+
+    this.html.types = document.querySelectorAll('[device-type-btn]');
+    for (var i = 0; i < this.html.types.length; i++) {
+        var typeBlock = this.html.types[i];
+        typeBlock.addEventListener('click', function(){
+            var typeId = this.getAttribute('device-type-btn');
+            self.onSelectType(typeId);
+        })
+    }
+
+
+}
+
+UI.onSelectType = function(typeId){
+    
+}
+
+
 function ready() {
-    initMarkup();
+    Markup.init();
+    UI.init();
 };
 
 document.addEventListener("DOMContentLoaded", ready);
