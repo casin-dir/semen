@@ -25,12 +25,20 @@ document.addEventListener("DOMContentLoaded", ready);
 
 
 
+
+
+
+
+
+
+
 /////////////
 function sendTestData(){
     var clientName = document.getElementById('test-name').value;
     var clientPhone = document.getElementById('test-phone').value;
     var clientAddress = document.getElementById('test-addres').value;
     var clientCrashes = document.getElementById('test-crashes').value.split(' ');
+    var csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
 
 
     console.log(clientName);
@@ -49,7 +57,8 @@ function sendTestData(){
         name: clientName,
         phone: clientPhone,
         address: clientAddress,
-        crashes: clientCrashes
+        crashes: clientCrashes,
+        csrfmiddlewaretoken: csrfToken
     }));
 
     xhr.onreadystatechange = function() { // (3)
@@ -66,7 +75,6 @@ function sendTestData(){
         alert('timeout')
     }
 }
-
 
 document.getElementById('test-send').addEventListener('click', function(){
     sendTestData();

@@ -21,6 +21,11 @@ html, body{
     border: 1px solid #0070c9;
 }
 
+.blue-text{
+    color: #0070c9;
+    font-size: inherit;
+}
+
 .header{
     display: block;
     position: fixed;
@@ -380,6 +385,20 @@ html, body{
     height: 30rem;
     background-color: #fff;
     margin-top: 2rem;
+}
+
+
+
+
+
+.screen-2__order-description{
+    display: block;
+    position: relative;
+    margin: 0 auto;
+    width: 30rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    color: #444;
 }
 
 
