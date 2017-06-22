@@ -15,11 +15,13 @@ def total_cost(id):
     cost = 0
     crash = Crash.objects.get(id=id)
     rps = crash.rps.all()
+
     for rp in rps:
         cost += rp.cost
-        pass
+
     if crash.percent_cost != 0:
         cost += cost * crash.percent_cost / 100
+
     cost += crash.abs_cost
     return cost
 
@@ -29,13 +31,12 @@ class Landing(View):
         Device.objects.all()
         types = Type.objects.all()
 
-
-
         for type in types:
             context['list'].append(
                 {'type': type,
                  'models': []}
             )
+
         for con in context['list']:
             devices = Device.objects.filter(type=con['type'])
             for device in devices:
@@ -52,6 +53,7 @@ class Landing(View):
 
 
 class NewOrder(View):
+
     def post(self, request):
         data = json.loads(self.request.body.decode('utf8'))
         crashes = []
@@ -71,12 +73,15 @@ class NewOrder(View):
 
         )
         order.save()
+
         for crash in crashes:
             order.crashes.add(crash)
+
         return HttpResponse(status=200)
 
     def total(self, crashes):
         cost = 0
+
         for crash in crashes:
             cost +=total_cost(crash.id)
 
