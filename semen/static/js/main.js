@@ -30,10 +30,15 @@ UI.init = function(){
     this.data.device.name = null;
     this.data.device.type = null;
     this.data.device.crashes = [];
+    this.data.device.cost = 0;
+    this.data.device.time = 0;
 
     this.showStepClass = 'screen-2__step_visible';
     this.showDeviceNamesClass = 'screen-2__devices-names_visible';
     this.showDeviceCrashesClass = 'screen-2__crashes-names_visible';
+
+    this.showDeviceDescClass = 'screen-2__order-description_visible';
+    this.showCrashesSelectedButtonClass = 'button_visible';
 
     this.activeTypeClass = 'screen-2__device-type_selected';
     this.activeNameClass = 'screen-2__device-name_selected';
@@ -47,6 +52,12 @@ UI.init = function(){
 
     this.html.currentNamesContainer = null;
     this.html.currentCrashesContainer = null;
+
+    this.html.crashesDesc = document.querySelectorAll('[select-param="device-crashes-desc"]')[0];
+    this.html.buttonSelectedCrashes = document.querySelectorAll('[select-param="device-selected-crashes-button"]')[0];
+
+    this.html.deviceCrashCost = document.querySelectorAll('[select-param="device-crash-cost"]')[0];
+    this.html.deviceCrashTime = document.querySelectorAll('[select-param="device-crash-time"]')[0];
 
     this.html.step2 = document.getElementById('calc-step-2');
     this.html.step3 = document.getElementById('calc-step-3');
@@ -131,7 +142,8 @@ UI.resetCurrentCrashes = function(hideContainer){
     }
 
     self.html.currentCrashes = [];
-    this.data.device.crashes = [];
+    self.data.device.crashes = [];
+    self.updateCrashesDesc();
 }
 
 UI.onSelectType = function(typeBlock){
@@ -183,13 +195,100 @@ UI.onSelectName = function(nameBlock){
 
 UI.onSelectCrash = function(crashBlock){
     var self = this;
-    self.html.currentCrashes.push(crashBlock);
-
-    crashBlock.classList.add(self.activeCrashClass);
 
     var crashId = crashBlock.getAttribute('device-crash-btn');
+    var crashIndex = self.data.device.crashes.indexOf(crashId);
 
-    self.data.device.crashes.push(crashId);
+    if (crashIndex >= 0) {
+        self.data.device.crashes.splice(crashIndex, 1);
+    }else{
+        self.data.device.crashes.push(crashId);
+    }
+
+    crashIndex = self.html.currentCrashes.indexOf(crashBlock);
+
+    if (crashIndex >= 0) {
+        var oldCrashBlock = self.html.currentCrashes.splice(crashIndex, 1)[0];
+        oldCrashBlock.classList.remove(self.activeCrashClass);
+    }else{
+        crashBlock.classList.add(self.activeCrashClass);
+        self.html.currentCrashes.push(crashBlock);
+    }
+
+    self.updateCrashesDesc();
+}
+
+UI.updateCrashesDesc = function(){
+
+    function getPrefixMinutes(minutes){
+        var prefixes = {
+            '1': 'минута',
+            '2': 'минуты',
+            '3': 'минуты',
+            '4': 'минуты',
+        }
+
+        if (minutes >= 10 & minutes <= 20) {
+            return 'минут';
+        }
+
+        var remnant = (minutes % 10).toString();
+        return prefixes[remnant] || 'минут';
+    }
+
+    function getPrefixHours(hours){
+        var prefixes = {
+            '1': 'час',
+            '2': 'часа',
+            '3': 'часа',
+            '4': 'часа',
+        }
+
+        if (hours >= 10 & hours <= 20) {
+            return 'часов';
+        }
+
+        var remnant = (hours % 10).toString();
+        return prefixes[remnant] || 'часов';
+    }
+
+    var self = this;
+
+    if (self.html.currentCrashes.length === 0){
+        self.html.crashesDesc.classList.remove(self.showDeviceDescClass);
+        self.html.buttonSelectedCrashes.classList.remove(self.showCrashesSelectedButtonClass);
+        return;
+    }
+
+    var totalTime = 0;
+    var totalCost = 0;
+
+    for (var i = 0; i < self.html.currentCrashes.length; i++) {
+        var crash = self.html.currentCrashes[i];
+        var crashTime = parseInt(crash.getAttribute('crash-time'));
+        var crashCost = parseInt(crash.getAttribute('crash-cost'));
+        totalTime += crashTime;
+        totalCost += crashCost;
+    }
+
+    self.html.crashesDesc.classList.add(self.showDeviceDescClass);
+    self.html.buttonSelectedCrashes.classList.add(self.showCrashesSelectedButtonClass);
+
+    var hours = Math.floor(totalTime / 60);
+
+    if (hours > 0) {
+        var minutes = totalTime - 60*hours;
+
+        if (minutes === 0) {
+            this.html.deviceCrashTime.innerHTML = hours + ' ' + getPrefixHours(hours);
+        }else{
+            this.html.deviceCrashTime.innerHTML = hours + ' ' + getPrefixHours(hours) + ' ' + minutes + ' ' + getPrefixMinutes(minutes);
+        }
+    }else{
+        this.html.deviceCrashTime.innerHTML = totalTime + ' ' + getPrefixMinutes(totalTime);
+    }
+
+    this.html.deviceCrashCost.innerHTML = totalCost + ' ₽';
 }
 
 

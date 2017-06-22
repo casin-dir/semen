@@ -102,9 +102,12 @@
                             <div 
                                 class="screen-2__crash"
                                 device-crash-btn="{{ crash.id }}"
+                                crash-cost="{{ crash.cost }}"
+                                crash-time="{{ crash.time }}"
                             >
                                 <div class="screen-2__crash-icon"></div>
-                                <div class="screen-2__crash-name">
+                                <div 
+                                class="screen-2__crash-name">
                                     {{ crash.name }}
                                     <span class="screen-2__crash-cost">
                                         {{ crash.cost }}₽
@@ -117,13 +120,28 @@
                 {% endfor %}
             {% endfor %}
 
-            <p class="screen-2__order-description _selectable">
+            <p 
+                select-param="device-crashes-desc"
+                class="screen-2__order-description _selectable"
+            >
                 Наш мастер перезвонит Вам в течение часа. Точная сумма заказа
-                <span class="blue-text _selectable">9700 ₽</span>, ремонт займет не более 
-                <span class="blue-text _selectable">45 минут</span>.
+                <span 
+                    class="blue-text _selectable" 
+                    select-param="device-crash-cost">
+                    9700₽
+                </span>, ремонт займет не более чем
+                <span 
+                    class="blue-text _selectable"
+                    select-param="device-crash-time"
+                ></span>.
             </p>
 
-            <div class="screen-2__crashes-selected button">Готово</div>
+            <div 
+                class="button"
+                select-param="device-selected-crashes-button"
+            >
+                Готово
+            </div>
 
         </div>
 
