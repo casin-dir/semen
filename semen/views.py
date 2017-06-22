@@ -23,7 +23,16 @@ def total_cost(id):
         cost += cost * crash.percent_cost / 100
 
     cost += crash.abs_cost
-    return cost
+    return int(cost)
+
+def total_time(id):
+    time = 0
+    crash = Crash.objects.get(id=id)
+    rps = crash.rps.all()
+    for rp in rps:
+        time += rp.time_to_repair
+
+    return int(time)
 
 class Landing(View):
     def get(self, request):
@@ -46,7 +55,8 @@ class Landing(View):
                     ch.append({'name': crash.name,
                                'id': crash.id,
                                'url': crash.url,
-                               'cost': int(total_cost(crash.id))})
+                               'cost': total_cost(crash.id),
+                               'time': total_time(crash.id)})
                 con['models'].append({'name': device.name, 'id': device.id, 'crashes': ch})
 
         return render(request, 'index.html', context)
@@ -83,6 +93,6 @@ class NewOrder(View):
         cost = 0
 
         for crash in crashes:
-            cost +=int(total_cost(crash.id))
+            cost +=total_cost(crash.id)
 
         return cost
