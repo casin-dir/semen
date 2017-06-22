@@ -69,7 +69,7 @@
         </div>
 
     
-        <div class="screen-2__step screen-2__step_2">
+        <div id="calc-step-2" class="screen-2__step screen-2__step_2">
             <h3 class="screen-2__step-title">Выбери модель</h3>
 
             {% for item in list %}
@@ -89,10 +89,8 @@
             {% endfor %}
         </div>
 
-        <div class="screen-2__step screen-2__step_3">
+        <div id="calc-step-3" class="screen-2__step screen-2__step_3">
             <h3 class="screen-2__step-title">Что сломалось</h3>
-
-
 
             {% for item in list %}
                 {% for device in item.models %}
@@ -102,7 +100,7 @@
                     >
                         {% for crash in device.crashes %}
                             <div 
-                                class="screen-2__crash screen-2__crash_selected"
+                                class="screen-2__crash"
                                 device-crash-btn="{{ crash.id }}"
                             >
                                 <div class="screen-2__crash-icon"></div>
@@ -126,7 +124,7 @@
             </p>
 
             <div class="screen-2__crashes-selected button">Готово</div>
-            
+
         </div>
 
 

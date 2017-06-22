@@ -29,17 +29,27 @@ UI.init = function(){
     this.data.device = {};
     this.data.device.name = null;
     this.data.device.type = null;
-    this.data.device.crashes = null;
+    this.data.device.crashes = [];
 
     this.showStepClass = 'screen-2__step_visible';
     this.showDeviceNamesClass = 'screen-2__devices-names_visible';
+    this.showDeviceCrashesClass = 'screen-2__crashes-names_visible';
+
     this.activeTypeClass = 'screen-2__device-type_selected';
+    this.activeNameClass = 'screen-2__device-name_selected';
+    this.activeCrashClass = 'screen-2__crash_selected';
 
     this.html = {};
 
     this.html.currentType = null;
     this.html.currentName = null;
     this.html.currentCrashes = [];
+
+    this.html.currentNamesContainer = null;
+    this.html.currentCrashesContainer = null;
+
+    this.html.step2 = document.getElementById('calc-step-2');
+    this.html.step3 = document.getElementById('calc-step-3');
 
     this.html.types = document.querySelectorAll('[device-type-btn]');
     this.html.names = document.querySelectorAll('[device-name-btn]');
@@ -59,60 +69,127 @@ UI.init = function(){
     for (var i = 0; i < this.html.names.length; i++) {
         var nameBlock = this.html.names[i];
         nameBlock.addEventListener('click', function(){
-            var nameId = this.getAttribute('device-name-btn');
-            self.onSelectName(nameId);
+            self.onSelectName(this);
         })
     }
 
     for (var i = 0; i < this.html.crashes.length; i++) {
         var crashBlock = this.html.crashes[i];
         crashBlock.addEventListener('click', function(){
-            var crashId = this.getAttribute('device-crash-btn');
-            self.onSelectCrash(crashId);
+            self.onSelectCrash(this);
         })
     }
 
 
 }
 
-UI.resetCurrentFromStep = function(step){
+UI.resetCurrentType = function(){
     var self = this;
-
-
-    if(this.html.currentName){
-        // this.html.currentName
-        // unselect current name & hide names block
-    }
 
     if (self.html.currentType) {
         self.html.currentType.classList.remove(self.activeTypeClass);
     }
+    this.data.device.type = null;
+    self.html.currentType = null;
+}
 
-    this.html.currentType = null;
+UI.resetCurrentName = function(hideContainer){
+    var self = this;
+
+    if (hideContainer) {
+        self.html.step2.classList.remove(self.showStepClass);
+    }
+
+    if (self.html.currentNamesContainer && hideContainer) {
+        self.html.currentNamesContainer.classList.remove(self.showDeviceNamesClass);
+        self.html.currentNamesContainer = null;
+    }
+
+    if(self.html.currentName){
+        self.html.currentName.classList.remove(self.activeNameClass);
+    }
+
+    self.html.currentName = null;
+    self.data.device.name = null;
+}
+
+UI.resetCurrentCrashes = function(hideContainer){
+    var self = this;
+
+    if (hideContainer) {
+        self.html.step3.classList.remove(self.showStepClass);
+    }
+
+    if (self.html.currentCrashesContainer && hideContainer) {
+        self.html.currentCrashesContainer.classList.remove(self.showDeviceCrashesClass);
+        self.html.currentCrashesContainer = null;
+    }
+
+    for (var i = 0; i < self.html.currentCrashes.length; i++) {
+        var crashBlock = self.html.currentCrashes[i];
+        crashBlock.classList.remove(self.activeCrashClass);
+    }
+
+    self.html.currentCrashes = [];
+    this.data.device.crashes = [];
 }
 
 UI.onSelectType = function(typeBlock){
     var self = this;
 
-    self.resetCurrentFromStep(0);
+    self.resetCurrentType();
+    self.resetCurrentName(true);
+    self.resetCurrentCrashes(true);
 
     self.html.currentType = typeBlock;
     self.html.currentType.classList.add(self.activeTypeClass);
 
     self.data.device.type = typeBlock.getAttribute('device-type-btn');
 
-    if (self.html.currentName) {
+    for(var i = 0; i < self.html.namesContainers.length; i++){
+        var nameContainer = self.html.namesContainers[i];
+        var deviceTypeId = nameContainer.getAttribute('device-type-id');
 
+        if (deviceTypeId === self.data.device.type) {
+            self.html.step2.classList.add(self.showStepClass);
+            nameContainer.classList.add(self.showDeviceNamesClass);
+            self.html.currentNamesContainer = nameContainer;
+        }
     }
-
 }
 
-UI.onSelectName = function(nameId){
-    console.log('select name ' + nameId);
+UI.onSelectName = function(nameBlock){
+    var self = this;
+
+    self.resetCurrentName(false);
+    self.resetCurrentCrashes(true);
+
+    self.html.currentName = nameBlock;
+    self.html.currentName.classList.add(self.activeNameClass);
+
+    self.data.device.name = nameBlock.getAttribute('device-name-btn');
+
+    for (var i = 0; i < this.html.crashesContainers.length; i++) {
+        var crashContainer = this.html.crashesContainers[i];
+        var deviceNameId = crashContainer.getAttribute('device-name-id');
+
+        if (deviceNameId === self.data.device.name) {
+            self.html.step3.classList.add(self.showStepClass);
+            crashContainer.classList.add(self.showDeviceCrashesClass);
+            self.html.currentCrashesContainer = crashContainer;
+        }
+    }
 }
 
-UI.onSelectCrash = function(crashId){
-    console.log('select crash ' + crashId);
+UI.onSelectCrash = function(crashBlock){
+    var self = this;
+    self.html.currentCrashes.push(crashBlock);
+
+    crashBlock.classList.add(self.activeCrashClass);
+
+    var crashId = crashBlock.getAttribute('device-crash-btn');
+
+    self.data.device.crashes.push(crashId);
 }
 
 

@@ -220,11 +220,25 @@ html, body{
     margin-bottom: calc(2rem - 2rem);
 }
 
+.screen-2__devices-names{
+    display: none;
+}
+
+.screen-2__devices-names_visible{
+    display: inline-block;
+}
+
+
+
 .screen-2__crashes-names{
+    display: none;
     text-align: center;
     width: 55rem;
     margin-bottom: calc(2rem - 2.5rem);
-    left: 1rem;
+}
+
+.screen-2__crashes-names_visible{
+    display: inline-block;
 }
 
 .screen-2__devices-types{
@@ -339,15 +353,22 @@ html, body{
     border: 1px solid #0070c9;
     color: #0070c9;
     font-weight: 100;
-    margin-right: 2rem;
+    margin-right: 1rem;
+    margin-left: 1rem;
     margin-bottom: 2rem;
     cursor: pointer;
     transition: .2s all;
+    opacity: .75;
 }
 
 .screen-2__device-name:hover{
+    opacity: 1;
+}
+
+.screen-2__device-name_selected{
     background-color: #0070c9;
     color: #fff;
+    opacity: 1;
 }
 
 
@@ -361,7 +382,8 @@ html, body{
     width: 8rem;
     border-radius: .5rem;
     border: 1px solid #ccc;
-    margin-right: 2rem;
+    margin-right: 1rem;
+    margin-left: 1rem;
     margin-bottom: 2rem;
     cursor: pointer;
     transition: .2s all;
@@ -375,6 +397,7 @@ html, body{
     left: 1rem;
     width: calc(100% - 2rem);
     height: 3rem;
+    cursor: pointer;
     /*background-color: red;*/
 }
 
@@ -389,14 +412,16 @@ html, body{
     padding-right: 1rem;
     color: inherit;
     font-size: .8rem;
+    cursor: pointer;
 }
 
 .screen-2__crash-cost{
     display: block;
+    cursor: pointer;
     color: #0070c9;
 }
 
-
+/*screen-2__crash_selected*/
 .screen-2__crash:hover,
 .screen-2__crash_selected{
     background-color: #fff;
@@ -440,9 +465,9 @@ html, body{
     opacity: 0;
 }
 
-.screen-2__crash:hover > .screen-2__crash-check{
+/*.screen-2__crash:hover > .screen-2__crash-check{
     opacity: .5;
-}
+}*/
 
 .screen-2__crash:active > .screen-2__crash-check,
 .screen-2__crash.screen-2__crash_selected > .screen-2__crash-check{
