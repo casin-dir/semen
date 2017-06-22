@@ -46,7 +46,7 @@ class Landing(View):
                     ch.append({'name': crash.name,
                                'id': crash.id,
                                'url': crash.url,
-                               'cost': total_cost(crash.id)})
+                               'cost': int(total_cost(crash.id))})
                 con['models'].append({'name': device.name, 'id': device.id, 'crashes': ch})
 
         return render(request, 'index.html', context)
@@ -83,6 +83,6 @@ class NewOrder(View):
         cost = 0
 
         for crash in crashes:
-            cost +=total_cost(crash.id)
+            cost +=int(total_cost(crash.id))
 
         return cost
