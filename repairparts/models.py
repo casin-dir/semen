@@ -17,6 +17,6 @@ class RepairParts(Model):
 
 
     def __str__(self):
-        return '%s' % (self.name)
+        return '%s %s' % (self.device,self.name )
 
 

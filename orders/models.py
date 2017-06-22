@@ -1,5 +1,7 @@
 from django.db import models
 from django.db.models import Model
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 
 from crashes.models import Crash
 from devices.models import Device
@@ -27,6 +29,21 @@ class Order(Model):
     travel_time = models.IntegerField(default=0,verbose_name=u'Приблизительное время поезки(в минутах)')
     total_cost = models.IntegerField(verbose_name='Общая сумма заказа')
     status = models.CharField(max_length=100,default='NEW',choices=STATUS,verbose_name='Статус')
+    handled = models.BooleanField(default=False,editable=False)
 
     def get_crashes(self):
         return ", ".join([str(cr) for cr in self.crashes.all()])
+
+@receiver(pre_save, sender=Order)
+def add_score(instance, **kwargs):
+    handled = instance.handled
+    status = instance.status
+    if handled is False and status == 'DONE':
+        crashes = instance.crashes.all()
+        for crash in crashes:
+            rps = crash.rps.all()
+            for rp in rps:
+                rp.quantity -=1
+                rp.save()
+        instance.handled = True
+        instance.save()
