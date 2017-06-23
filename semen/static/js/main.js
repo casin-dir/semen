@@ -1,5 +1,22 @@
 // markup
 var Markup = {};
+var myMap = null;
+var userPlacemark = null;
+var coords = null;
+
+//Функция для передачи полученных значений в форму
+function savecoordinats (){ 
+    if (coords) {
+
+        console.log(userPlacemark);
+
+        var new_coords = [coords[0].toFixed(4), coords[1].toFixed(4)];  
+        // userPlacemark.getOverlay().getData().geometry.setCoordinates(new_coords);
+        userPlacemark.geometry.setCoordinates(new_coords);
+        var center = myMap.getCenter();
+        var new_center = [center[0].toFixed(4), center[1].toFixed(4)];   
+    }
+}
 
 Markup.fitFontSize = function() {
     var currentWidth = window.innerWidth;
@@ -59,6 +76,8 @@ UI.init = function(){
     this.html.deviceCrashCost = document.querySelectorAll('[select-param="device-crash-cost"]')[0];
     this.html.deviceCrashTime = document.querySelectorAll('[select-param="device-crash-time"]')[0];
 
+    this.html.map = document.querySelectorAll('[select-param="client-address-map"]')[0];
+
     this.html.step2 = document.getElementById('calc-step-2');
     this.html.step3 = document.getElementById('calc-step-3');
 
@@ -91,7 +110,9 @@ UI.init = function(){
         })
     }
 
-
+    self.html.buttonSelectedCrashes.addEventListener('click', function(){
+        self.onClickReady();
+    })
 }
 
 UI.resetCurrentType = function(){
@@ -144,6 +165,7 @@ UI.resetCurrentCrashes = function(hideContainer){
     self.html.currentCrashes = [];
     self.data.device.crashes = [];
     self.updateCrashesDesc();
+    self.html.map.classList.remove(self.showStepClass);
 }
 
 UI.onSelectType = function(typeBlock){
@@ -254,6 +276,8 @@ UI.updateCrashesDesc = function(){
 
     var self = this;
 
+    self.html.map.classList.remove(self.showStepClass);
+
     if (self.html.currentCrashes.length === 0){
         self.html.crashesDesc.classList.remove(self.showDeviceDescClass);
         self.html.buttonSelectedCrashes.classList.remove(self.showCrashesSelectedButtonClass);
@@ -280,21 +304,90 @@ UI.updateCrashesDesc = function(){
         var minutes = totalTime - 60*hours;
 
         if (minutes === 0) {
-            this.html.deviceCrashTime.innerHTML = hours + ' ' + getPrefixHours(hours);
+            self.html.deviceCrashTime.innerHTML = hours + ' ' + getPrefixHours(hours);
         }else{
-            this.html.deviceCrashTime.innerHTML = hours + ' ' + getPrefixHours(hours) + ' ' + minutes + ' ' + getPrefixMinutes(minutes);
+            self.html.deviceCrashTime.innerHTML = hours + ' ' + getPrefixHours(hours) + ' ' + minutes + ' ' + getPrefixMinutes(minutes);
         }
     }else{
-        this.html.deviceCrashTime.innerHTML = totalTime + ' ' + getPrefixMinutes(totalTime);
+        self.html.deviceCrashTime.innerHTML = totalTime + ' ' + getPrefixMinutes(totalTime);
     }
 
-    this.html.deviceCrashCost.innerHTML = totalCost + ' ₽';
+    self.html.deviceCrashCost.innerHTML = totalCost + ' ₽';
+}
+
+UI.onClickReady = function(){
+    var self = this;
+    self.html.map.classList.add(this.showStepClass);
+    self.html.buttonSelectedCrashes.classList.remove(this.showCrashesSelectedButtonClass);
+    if (myMap) {
+        myMap.container.fitToViewport();
+    }
+}
+
+
+
+// Map
+function initMap() {
+    myMap = new ymaps.Map('map', {
+        center: [55.76, 37.64], // Москва
+        zoom: 10,
+        controls: ['zoomControl', 'searchControl', 'geolocationControl']
+    }, {
+        searchControlProvider: 'yandex#search'
+    });
+
+
+
+
+    var SearchControl = new ymaps.control.SearchControl({noPlacemark:true});
+
+    userPlacemark = new ymaps.Placemark([55.76, 37.64],{}, {
+        iconLayout: 'default#image',
+        iconImageHref: '/static/images/placemark.svg',
+        iconImageSize: [50, 50],
+        iconImageOffset: [-25, -50],
+        draggable: true 
+    }); 
+    myMap.geoObjects.add(userPlacemark);      
+
+    //Отслеживаем событие перемещения метки
+    userPlacemark.events.add("dragend", function (e) {            
+        coords = this.geometry.getCoordinates();
+        savecoordinats();
+    }, userPlacemark);
+
+    //Отслеживаем событие щелчка по карте
+    myMap.events.add('click', function (e) {        
+        coords = e.get('coords');
+        console.warn('CLICK');
+        console.warn(coords);
+        savecoordinats();
+    });
+
+    //Отслеживаем событие выбора результата поиска
+    SearchControl.events.add("resultselect", function (e) {
+        coords = SearchControl.getResultsArray()[0].geometry.getCoordinates();
+        savecoordinats();
+    });
+ 
+    //Ослеживаем событие изменения области просмотра карты - масштаб и центр карты
+    myMap.events.add('boundschange', function (event) {
+        if (event.get('newZoom') != event.get('oldZoom')) {     
+            savecoordinats();
+        }
+
+        if (event.get('newCenter') != event.get('oldCenter')) {       
+            savecoordinats();
+        }
+    });
+ 
 }
 
 
 function ready() {
     Markup.init();
     UI.init();
+    ymaps.ready(initMap);
 };
 
 document.addEventListener("DOMContentLoaded", ready);
