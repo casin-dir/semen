@@ -146,43 +146,54 @@
         </div>
 
 
+
+
+
         <div 
-            class="screen-2__map" 
-            select-param="client-address-map"
+            class="screen-2__order"
+            id="screen-2__order" 
+            select-param="order-form"
         >
-            <h3 class="screen-2__step-title">Где вы находитесь</h3>
-            <div id="map"></div>
-        </div>
 
-        <div class="screen-2__order">
-            <h3 class="screen-2__step-title">Контактные данные</h3>
-            <div class="screen-2__order-form">
+            <!-- screen-2__order-container_right -->
+            <div 
+            select-param="order-form-contacts"
+            class="screen-2__order-container">
+                <h3 class="screen-2__step-title">Контактные данные</h3>
+                <div class="screen-2__order-form">
 
-
-            <p class="screen-2__order-description _selectable">
-                Наш мастер перезвонит Вам в течение часа. Точная сумма заказа
-                <span class="blue-text _selectable">9700 ₽</span>, ремонт займет не более 
-                <span class="blue-text _selectable">45 минут</span>.
-            </p>
+                    <div class="text-input">
+                        <label class="text-input__label" for="client-name">Как Вас зовут</label>
+                        <input id="client-name" type="text" class="text-input__input">
+                    </div>
 
 
-                <div class="text-input">
-                    <label class="text-input__label" for="client-name">Как Вас зовут</label>
-                    <input id="client-name" type="text" class="text-input__input">
-                </div>
+                    <div class="text-input">
+                        <label class="text-input__label" for="client-phone">Контактный телефон</label>
+                        <input id="client-phone" type="tel" class="text-input__input">
+                    </div>
 
-
-                <div class="text-input">
-                    <label class="text-input__label" for="client-phone">Контактный телефон</label>
-                    <input id="client-phone" type="text" class="text-input__input">
+                    <div class="checkbox">
+                        <!-- checkbox__checkbox_active -->
+                        <div 
+                        select-param="show-map-checkbox"
+                        class="checkbox__checkbox"></div>
+                        <label class="checkbox__label">Указать адрес на карте</label>
+                    </div>
+                
+                    <div 
+                    id="button_order" 
+                    class="button button_blue">Вызвать мастера</div>
                 </div>
             
-                <div class="button button_blue">Вызвать мастера</div>
-            </div>
-        </div>
-
 
         
+            </div>
+
+            <!-- screen-2__map-container_visible -->
+            <div id="map" class="screen-2__map-container"></div>
+        </div>
+
 
     </div>
 

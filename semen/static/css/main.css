@@ -3,6 +3,44 @@ html, body{
     width: 100%;
 }
 
+.checkbox{
+    display: block;
+    position: relative;
+    margin-bottom: 1.5rem;
+    margin-left: 0;
+    text-align: left;
+}
+
+.checkbox__checkbox{
+    display: inline-block;
+    position: relative;
+    height: 2rem;
+    width: 2rem;
+    border: 1px solid #ccc;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: .2s all;
+}
+
+.checkbox__checkbox_active{
+    background-color: #fff;
+    background-image: url('../icons/check-icon.svg');
+    background-position: center;
+    background-size: 50%;
+    background-repeat: no-repeat;
+}
+
+.checkbox__label{
+    display: inline-block;
+    position: relative;
+    text-align: left;
+    color: #444;
+    font-size: 1rem;
+    line-height: 2rem;
+    margin-left: 1rem;
+    vertical-align: top;
+}
+
 .button{
     display: none;
     height: 2rem;
@@ -33,7 +71,7 @@ html, body{
     display: block;
     margin: 0 auto;
     width: 15rem;
-    margin-top: .5rem; 
+    margin-bottom: 1.5rem; 
 }
 
 .text-input__input{
@@ -41,17 +79,18 @@ html, body{
     border: 1px solid #ccc;
     width: 100%;
     border-radius: .5rem;
-    height: 2.3rem;
+    height: 2rem;
     padding-left: 1rem;
     font-size: 1rem;
     background-color: transparent;
-    line-height: 2.3rem;
+    line-height: 2rem;
     color: #222;
     transition: .2s all;
 }
 
 .text-input__input:focus{
     border: 1px solid #0070c9;
+    background-color: #fff;
 }
 
 .blue-text{
@@ -184,7 +223,6 @@ html, body{
 
 
 .screen-2__step,
-.screen-2__map,
 .screen-2__order{
     display: none;
     position: relative;
@@ -194,10 +232,6 @@ html, body{
 
 .screen-2__step_visible{
     display: block;
-}
-
-.screen-2__map{
-    width: 100%;
 }
 
 .screen-2__order{
@@ -428,6 +462,7 @@ html, body{
 .screen-2__crash-cost{
     display: block;
     cursor: pointer;
+    font-size: .8rem;
     color: #0070c9;
 }
 
@@ -454,19 +489,53 @@ html, body{
     opacity: 0;
 }
 
-/*.screen-2__crash:hover > .screen-2__crash-check{
-    opacity: .5;
-}*/
-
 .screen-2__crash:active > .screen-2__crash-check,
 .screen-2__crash.screen-2__crash_selected > .screen-2__crash-check{
     opacity: 1;
 }
 
+
+
+
+
+
+.screen-2__map-container{
+    display: block;
+    transform: translateX(-40rem);
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100% - 18rem);
+    height: 100%;
+    left: -5rem;
+    transition: .2s all;
+}
+
+.screen-2__map-container_visible{
+    opacity: 1;
+    transform: none;
+}
+
+.screen-2__order-container{
+    display: block;
+    position: absolute;
+    width: auto;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: .2s all;
+}
+
+.screen-2__order-container_right{
+    right: 0;
+    left: auto;
+    transform: translate(0, -50%);
+}
+
 #map{
     height: 30rem;
-    background-color: #fff;
-    margin-top: 2rem;
+    background-color: #fff; 
 }
 
 
@@ -487,6 +556,15 @@ html, body{
     display: block;
 }
 
+.screen-2__order{
+    height: 30rem;
+}
+
+
+#button_order{
+    display: inline-block;
+    margin-top: 0;
+}
 
 
 

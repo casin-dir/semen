@@ -1,22 +1,5 @@
 // markup
 var Markup = {};
-var myMap = null;
-var userPlacemark = null;
-var coords = null;
-
-//Функция для передачи полученных значений в форму
-function savecoordinats (){ 
-    if (coords) {
-
-        console.log(userPlacemark);
-
-        var new_coords = [coords[0].toFixed(4), coords[1].toFixed(4)];  
-        // userPlacemark.getOverlay().getData().geometry.setCoordinates(new_coords);
-        userPlacemark.geometry.setCoordinates(new_coords);
-        var center = myMap.getCenter();
-        var new_center = [center[0].toFixed(4), center[1].toFixed(4)];   
-    }
-}
 
 Markup.fitFontSize = function() {
     var currentWidth = window.innerWidth;
@@ -49,6 +32,8 @@ UI.init = function(){
     this.data.device.crashes = [];
     this.data.device.cost = 0;
     this.data.device.time = 0;
+    this.data.device.showMap = false;
+    this.data.device.address = null;
 
     this.showStepClass = 'screen-2__step_visible';
     this.showDeviceNamesClass = 'screen-2__devices-names_visible';
@@ -56,6 +41,10 @@ UI.init = function(){
 
     this.showDeviceDescClass = 'screen-2__order-description_visible';
     this.showCrashesSelectedButtonClass = 'button_visible';
+
+    this.showMapClass = 'screen-2__map-container_visible';
+    this.rightOrderFormClass = 'screen-2__order-container_right';
+    this.activeCheckboxClass = 'checkbox__checkbox_active';
 
     this.activeTypeClass = 'screen-2__device-type_selected';
     this.activeNameClass = 'screen-2__device-name_selected';
@@ -76,7 +65,12 @@ UI.init = function(){
     this.html.deviceCrashCost = document.querySelectorAll('[select-param="device-crash-cost"]')[0];
     this.html.deviceCrashTime = document.querySelectorAll('[select-param="device-crash-time"]')[0];
 
-    this.html.map = document.querySelectorAll('[select-param="client-address-map"]')[0];
+
+    this.html.orderForm = document.querySelectorAll('[select-param="order-form-contacts"]')[0];
+    this.html.mapContainer = document.getElementById('map');
+    this.html.showMapCheckbox = document.querySelectorAll('[select-param="show-map-checkbox"]')[0];
+
+    this.html.map = document.querySelectorAll('[select-param="order-form"]')[0];
 
     this.html.step2 = document.getElementById('calc-step-2');
     this.html.step3 = document.getElementById('calc-step-3');
@@ -112,6 +106,11 @@ UI.init = function(){
 
     self.html.buttonSelectedCrashes.addEventListener('click', function(){
         self.onClickReady();
+    })
+
+    self.html.showMapCheckbox.addEventListener('click', function(){
+        self.data.device.showMap = !self.data.device.showMap;
+        self.updateMapVisibility();
     })
 }
 
@@ -244,7 +243,7 @@ UI.updateCrashesDesc = function(){
 
     function getPrefixMinutes(minutes){
         var prefixes = {
-            '1': 'минута',
+            '1': 'минуту',
             '2': 'минуты',
             '3': 'минуты',
             '4': 'минуты',
@@ -319,75 +318,101 @@ UI.onClickReady = function(){
     var self = this;
     self.html.map.classList.add(this.showStepClass);
     self.html.buttonSelectedCrashes.classList.remove(this.showCrashesSelectedButtonClass);
-    if (myMap) {
-        myMap.container.fitToViewport();
+    if (Map.map) {
+        self.updateMapVisibility();
     }
 }
 
+UI.updateMapVisibility = function(){
+    var self = this;
+
+    if (self.data.device.showMap) {
+        self.html.orderForm.classList.add(self.rightOrderFormClass);
+        self.html.mapContainer.classList.add(self.showMapClass);
+        self.html.showMapCheckbox.classList.add(self.activeCheckboxClass);
+    }else{
+        self.html.orderForm.classList.remove(self.rightOrderFormClass);
+        self.html.mapContainer.classList.remove(self.showMapClass);
+        self.html.showMapCheckbox.classList.remove(self.activeCheckboxClass);
+    }
+    Map.map.container.fitToViewport();
+}
 
 
 // Map
-function initMap() {
-    myMap = new ymaps.Map('map', {
-        center: [55.76, 37.64], // Москва
+var Map = {};
+
+Map.saveCoords = function (){ 
+    var self = Map;
+    if (self.coords) {
+        var newCoords = [self.coords[0].toFixed(6), self.coords[1].toFixed(6)];  
+        self.userPlacemark.geometry.setCoordinates(newCoords);  
+    }
+}
+
+Map.init = function () {
+    var self = Map;
+
+    self.coords = null;
+
+    self.INITIAL_COORDS = [55.76, 37.64];
+
+    self.map = new ymaps.Map('map', {
+        center: self.INITIAL_COORDS, // Москва
         zoom: 10,
         controls: ['zoomControl', 'searchControl', 'geolocationControl']
-    }, {
-        searchControlProvider: 'yandex#search'
-    });
+    }, {});
 
 
+    self.searchControl = self.map.controls.get('searchControl');
+    self.searchControl.options.set('float', 'left');
+    self.searchControl.options.set('noPlacemark' , true);
 
-
-    var SearchControl = new ymaps.control.SearchControl({noPlacemark:true});
-
-    userPlacemark = new ymaps.Placemark([55.76, 37.64],{}, {
+    self.userPlacemark = new ymaps.Placemark([55.76, 37.64],{}, {
         iconLayout: 'default#image',
-        iconImageHref: '/static/images/placemark.svg',
+        iconImageHref: '/static/icons/placemark.svg',
         iconImageSize: [50, 50],
         iconImageOffset: [-25, -50],
         draggable: true 
     }); 
-    myMap.geoObjects.add(userPlacemark);      
+
+    self.map.geoObjects.add(self.userPlacemark);      
 
     //Отслеживаем событие перемещения метки
-    userPlacemark.events.add("dragend", function (e) {            
-        coords = this.geometry.getCoordinates();
-        savecoordinats();
-    }, userPlacemark);
+    self.userPlacemark.events.add("dragend", function (e) {            
+        self.coords = this.geometry.getCoordinates();
+        self.saveCoords();
+    }, self.userPlacemark);
 
     //Отслеживаем событие щелчка по карте
-    myMap.events.add('click', function (e) {        
-        coords = e.get('coords');
-        console.warn('CLICK');
-        console.warn(coords);
-        savecoordinats();
+    self.map.events.add('click', function (e) {        
+        self.coords = e.get('coords');
+        self.saveCoords();
     });
 
-    //Отслеживаем событие выбора результата поиска
-    SearchControl.events.add("resultselect", function (e) {
-        coords = SearchControl.getResultsArray()[0].geometry.getCoordinates();
-        savecoordinats();
+    self.searchControl.events.add("resultshow", function (e) {
+        self.coords = self.searchControl.getResultsArray()[0].geometry.getCoordinates();
+        self.saveCoords();
     });
  
     //Ослеживаем событие изменения области просмотра карты - масштаб и центр карты
-    myMap.events.add('boundschange', function (event) {
+    self.map.events.add('boundschange', function (event) {
         if (event.get('newZoom') != event.get('oldZoom')) {     
-            savecoordinats();
+            self.saveCoords();
         }
 
-        if (event.get('newCenter') != event.get('oldCenter')) {       
-            savecoordinats();
+        if (event.get('newCenter') != event.get('oldCenter')) {    
+            console.log(self);   
+            self.saveCoords();
         }
     });
- 
 }
 
 
 function ready() {
     Markup.init();
     UI.init();
-    ymaps.ready(initMap);
+    ymaps.ready(Map.init);
 };
 
 document.addEventListener("DOMContentLoaded", ready);
