@@ -26,28 +26,32 @@
     <!-- screen 1 -->
     <div class="screen screen-1">
         <h1 class="screen-1__title screen-1__title_main">Good Master</h1>
-        <h2 class="screen-1__title screen-1__title_sub">Быстрый и качетсвенный ремонт техники Apple</h2>
+        <h2 class="screen-1__title screen-1__title_sub">Быстрый и качественный ремонт техники Apple</h2>
 
         <div class="screen-1__buttons">
-            <div id="" class="
-                screen-1__button
-                screen-1__button_сallback">
-                Заказать звонок
-            </div>
-            <div id="calculate-cost" class="
+            <div id="screen-1__calculate-cost" class="
                 screen-1__button
                 screen-1__button_сalculate-cost">
                 Рассчитать стоимость
             </div>
+            <div id="screen-1__request-call" class="
+                screen-1__button
+                screen-1__button_сallback">
+                Заказать звонок
+            </div>
+        </div>
+
+        <div class="screen-1__social">
+            <a href="" class="screen-1__social-link"></a>
+            <a href="" class="screen-1__social-link"></a>
+            <a href="" class="screen-1__social-link"></a>
         </div>
     </div>
 
 
     <!-- screen 2 -->
     <div class="screen screen-2" id="calculating">
-
-
-        <div class="screen-2__step screen-2__step_1 screen-2__step_visible">
+        <div class="screen-2__step screen-2__step_1 screen-2__step_visible" id="calc-step-1">
             <h3 class="screen-2__step-title">Выбери устройство</h3>
             <div class="screen-2__devices-types">
                 {% for item in list %}
@@ -90,7 +94,7 @@
         </div>
 
         <div id="calc-step-3" class="screen-2__step screen-2__step_3">
-            <h3 class="screen-2__step-title">Что сломалось</h3>
+            <h3 class="screen-2__step-title">Что беспокоит</h3>
 
             {% for item in list %}
                 {% for device in item.models %}
@@ -154,8 +158,6 @@
             id="screen-2__order" 
             select-param="order-form"
         >
-
-            <!-- screen-2__order-container_right -->
             <div 
             select-param="order-form-contacts"
             class="screen-2__order-container">
@@ -174,7 +176,6 @@
                     </div>
 
                     <div class="checkbox">
-                        <!-- checkbox__checkbox_active -->
                         <div 
                         select-param="show-map-checkbox"
                         class="checkbox__checkbox"></div>
@@ -190,7 +191,6 @@
         
             </div>
 
-            <!-- screen-2__map-container_visible -->
             <div id="map" class="screen-2__map-container"></div>
         </div>
 
@@ -199,28 +199,10 @@
 
 
     <div class="screen screen-3">
-        {% for item in list %}
-            {% for device in item.models %}
-                {{ device.name }}
-            {% endfor %}
-        {% endfor %}
+        
     </div>
     <div class="screen screen-4">
-        {% for item in list %}
-            {% for device in item.models %}
-                {% for crash in device.crashes %}
-                    {{ crash.name }}
-                    {{ crash.id }}
-                {% endfor %}
-            {% endfor %}
-        {% endfor %}
-    </div>
-    <div class="screen screen-5">
-        <input type="text" id="test-name" placeholder="name">
-        <input type="text" id="test-phone" placeholder="phone">
-        <input type="text" id="test-addres" placeholder="address">
-        <input type="text" id="test-crashes" placeholder="crash,crash">
-        <div id="test-send">Send</div>
+        
     </div>
 </div>
 

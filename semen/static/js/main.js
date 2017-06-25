@@ -1,3 +1,55 @@
+window.requestAnimFrame = (function(){
+  return  window.requestAnimationFrame       ||
+          window.webkitRequestAnimationFrame ||
+          window.mozRequestAnimationFrame    ||
+          function( callback ){
+            window.setTimeout(callback, 1000 / 60);
+          };
+})();
+
+function scrollToY(scrollTargetY, speed, easing) {
+
+    var scrollY = window.scrollY || document.documentElement.scrollTop,
+        scrollTargetY = scrollTargetY || 0,
+        speed = speed || 2000,
+        easing = easing || 'easeOutSine',
+        currentTime = 0;
+
+    var time = Math.max(.1, Math.min(Math.abs(scrollY - scrollTargetY) / speed, .8));
+
+    var easingEquations = {
+            easeOutSine: function (pos) {
+                return Math.sin(pos * (Math.PI / 2));
+            },
+            easeInOutSine: function (pos) {
+                return (-0.5 * (Math.cos(Math.PI * pos) - 1));
+            },
+            easeInOutQuint: function (pos) {
+                if ((pos /= 0.5) < 1) {
+                    return 0.5 * Math.pow(pos, 5);
+                }
+                return 0.5 * (Math.pow((pos - 2), 5) + 2);
+            }
+        };
+
+    function tick() {
+        currentTime += 1 / 60;
+
+        var p = currentTime / time;
+        var t = easingEquations[easing](p);
+
+        if (p < 1) {
+            requestAnimFrame(tick);
+
+            window.scrollTo(0, scrollY + ((scrollTargetY - scrollY) * t));
+        } else {
+            window.scrollTo(0, scrollTargetY);
+        }
+    }
+
+    tick();
+}
+
 // markup
 var Markup = {};
 
@@ -50,6 +102,8 @@ UI.init = function(){
     this.activeNameClass = 'screen-2__device-name_selected';
     this.activeCrashClass = 'screen-2__crash_selected';
 
+    this.errorTextInputClass = 'text-input__input_error';
+
     this.html = {};
 
     this.html.currentType = null;
@@ -62,9 +116,13 @@ UI.init = function(){
     this.html.crashesDesc = document.querySelectorAll('[select-param="device-crashes-desc"]')[0];
     this.html.buttonSelectedCrashes = document.querySelectorAll('[select-param="device-selected-crashes-button"]')[0];
 
+    self.html.buttonOrder = document.getElementById('button_order');
+
     this.html.deviceCrashCost = document.querySelectorAll('[select-param="device-crash-cost"]')[0];
     this.html.deviceCrashTime = document.querySelectorAll('[select-param="device-crash-time"]')[0];
 
+    this.html.clientName = document.getElementById('client-name');
+    this.html.clientPhone = document.getElementById('client-phone');
 
     this.html.orderForm = document.querySelectorAll('[select-param="order-form-contacts"]')[0];
     this.html.mapContainer = document.getElementById('map');
@@ -72,8 +130,10 @@ UI.init = function(){
 
     this.html.map = document.querySelectorAll('[select-param="order-form"]')[0];
 
+    this.html.step1 = document.getElementById('calc-step-1');
     this.html.step2 = document.getElementById('calc-step-2');
     this.html.step3 = document.getElementById('calc-step-3');
+    this.html.step4 = document.getElementById('screen-2__order');
 
     this.html.types = document.querySelectorAll('[device-type-btn]');
     this.html.names = document.querySelectorAll('[device-name-btn]');
@@ -82,6 +142,9 @@ UI.init = function(){
     this.html.calculateScreen = document.getElementById('calculate-cost');
     this.html.namesContainers = document.querySelectorAll('[device-type-id]');
     this.html.crashesContainers = document.querySelectorAll('[device-name-id]');
+
+    this.html.calculateCostBtn = document.getElementById('screen-1__calculate-cost');
+    this.html.requestCallBtn = document.getElementById('screen-1__request-call');
 
     for (var i = 0; i < this.html.types.length; i++) {
         var typeBlock = this.html.types[i];
@@ -111,7 +174,43 @@ UI.init = function(){
     self.html.showMapCheckbox.addEventListener('click', function(){
         self.data.device.showMap = !self.data.device.showMap;
         self.updateMapVisibility();
+        // Map.userGeolocation();
     })
+
+    self.html.buttonOrder.addEventListener('click', function(){
+        self.onOrder();
+    })
+
+
+    this.html.clientName.onkeypress = function(e){
+        var re =  /[A-Za-zА-Яа-я]/;
+        if (!re.test(e.key)) {
+            e.preventDefault();
+        }
+    }
+
+    this.html.clientPhone.onkeypress = function(e){
+        var re = /[\d]/;
+        if(!re.test(e.key)){
+            e.preventDefault();
+        }
+    }
+
+    this.html.clientName.onfocus = function(){
+        self.html.clientName.classList.remove(self.errorTextInputClass);
+    }
+
+    this.html.clientPhone.onfocus = function(){
+        self.html.clientPhone.classList.remove(self.errorTextInputClass);
+    }
+
+    this.html.calculateCostBtn.addEventListener('click', function(){
+        self.updateScrollPosition(self.html.step1);
+    });
+
+    this.html.requestCallBtn.addEventListener('click', function(){
+        
+    });
 }
 
 UI.resetCurrentType = function(){
@@ -189,6 +288,8 @@ UI.onSelectType = function(typeBlock){
             self.html.currentNamesContainer = nameContainer;
         }
     }
+
+    self.updateScrollPosition(this.html.step2);
 }
 
 UI.onSelectName = function(nameBlock){
@@ -212,6 +313,8 @@ UI.onSelectName = function(nameBlock){
             self.html.currentCrashesContainer = crashContainer;
         }
     }
+
+    self.updateScrollPosition(this.html.step3);
 }
 
 UI.onSelectCrash = function(crashBlock){
@@ -320,7 +423,9 @@ UI.onClickReady = function(){
     self.html.buttonSelectedCrashes.classList.remove(this.showCrashesSelectedButtonClass);
     if (Map.map) {
         self.updateMapVisibility();
+        Map.userGeolocation();
     }
+    self.updateScrollPosition(this.html.step4);
 }
 
 UI.updateMapVisibility = function(){
@@ -335,7 +440,91 @@ UI.updateMapVisibility = function(){
         self.html.mapContainer.classList.remove(self.showMapClass);
         self.html.showMapCheckbox.classList.remove(self.activeCheckboxClass);
     }
-    Map.map.container.fitToViewport();
+
+    if (Map.map) {
+        Map.map.container.fitToViewport();
+    }
+}
+
+UI.onOrder = function(){
+
+    var error = false;
+
+    var clientName = this.html.clientName.value;
+    var nameRe = /[A-Za-zА-Яа-я\ ]+/;
+    if (!nameRe.test(clientName)) {
+        error = true;
+        this.html.clientName.classList.add(this.errorTextInputClass);
+    }
+
+    var clientPhone = this.html.clientPhone.value;
+    var phoneRe = /[\d]+/;
+    if (!phoneRe.test(clientPhone)) {
+        error = true;
+        this.html.clientPhone.classList.add(this.errorTextInputClass);
+    }
+
+    if (error) {
+        return;
+    }
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.open('POST', '/order');
+    xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+    xhr.timeout = 10000;
+    xhr.setRequestHeader("X-CSRFToken", document.getElementsByName('csrfmiddlewaretoken')[0].value);
+
+    xhr.send(JSON.stringify({
+        name: clientName,
+        phone: clientPhone,
+        coords: this.data.device.showMap ? Map.coords : null,
+        crashes: this.data.device.crashes
+    }));
+
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState != 4) return;
+
+      if (xhr.status != 200) {
+        alert(xhr.status + ': ' + xhr.statusText);
+      } else {
+        alert(xhr.responseText);
+      }
+    }
+
+    xhr.ontimeout = function(){
+        alert('timeout');
+    }
+}
+
+UI.updateScrollPosition = function(elem){
+
+    function calculateScrollOffset(elem, additionalOffset, alignment) {
+      var body = document.body,
+          html = document.documentElement;
+
+      var elemRect = elem.getBoundingClientRect();
+      var clientHeight = html.clientHeight;
+      var documentHeight = Math.max( body.scrollHeight, body.offsetHeight, 
+                                     html.clientHeight, html.scrollHeight, html.offsetHeight );
+
+      additionalOffset = additionalOffset || 0;
+
+      var scrollPosition;
+      if (alignment === 'bottom') {
+        scrollPosition = elemRect.bottom - clientHeight;
+      } else if (alignment === 'middle') {
+        scrollPosition = elemRect.bottom - clientHeight / 2 - elemRect.height / 2;
+      } else { // top and default
+        scrollPosition = elemRect.top;
+      }
+
+      var maxScrollPosition = documentHeight - clientHeight;
+      return Math.min(scrollPosition + additionalOffset + window.pageYOffset,
+                      maxScrollPosition);
+    }
+
+    scrollToY(calculateScrollOffset(elem, 0, 'middle'), 1000, 'easeInOutSine');
 }
 
 
@@ -346,7 +535,7 @@ Map.saveCoords = function (){
     var self = Map;
     if (self.coords) {
         var newCoords = [self.coords[0].toFixed(6), self.coords[1].toFixed(6)];  
-        self.userPlacemark.geometry.setCoordinates(newCoords);  
+        self.userPlacemark.geometry.setCoordinates(newCoords);
     }
 }
 
@@ -402,9 +591,32 @@ Map.init = function () {
         }
 
         if (event.get('newCenter') != event.get('oldCenter')) {    
-            console.log(self);   
             self.saveCoords();
         }
+    });
+}
+
+Map.userGeolocation = function() {
+    var self = this;
+
+    var geolocation = ymaps.geolocation;
+        
+    geolocation.get({
+        provider: 'yandex',
+        mapStateAutoApply: true
+    }).then(function (result) {
+        self.coords = result.geoObjects.position;
+        self.saveCoords();
+        self.map.setCenter(self.coords, 18);
+    });
+
+    geolocation.get({
+        provider: 'browser',
+        mapStateAutoApply: true
+    }).then(function (result) {
+        self.coords = result.geoObjects.position;
+        self.saveCoords();
+        self.map.setCenter(self.coords, 18);
     });
 }
 
@@ -422,57 +634,6 @@ document.addEventListener("DOMContentLoaded", ready);
 
 
 
+// https://yandex.ru/maps/?ll=37.685199%2C55.800577&z=12&ol=geo&mode=routes&rtext=55.788714%2C37.790972~55.821254%2C37.570959&rtt=auto
 
 
-
-
-
-
-/////////////
-function sendTestData(){
-    var clientName = document.getElementById('test-name').value;
-    var clientPhone = document.getElementById('test-phone').value;
-    var clientAddress = document.getElementById('test-addres').value;
-    var clientCrashes = document.getElementById('test-crashes').value.split(' ');
-    var csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
-
-
-    console.log(clientName);
-    console.log(clientPhone);
-    console.log(clientAddress);
-    console.log(clientCrashes);
-
-    var xhr = new XMLHttpRequest();
-
-    var xhr = new XMLHttpRequest();
-
-    xhr.open('POST', '/order');
-    xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-    xhr.timeout = 10000;
-    xhr.setRequestHeader("X-CSRFToken", csrfToken);
-
-    xhr.send(JSON.stringify({
-        name: clientName,
-        phone: clientPhone,
-        address: clientAddress,
-        crashes: clientCrashes
-    }));
-
-    xhr.onreadystatechange = function() { // (3)
-      if (xhr.readyState != 4) return;
-
-      if (xhr.status != 200) {
-        alert(xhr.status + ': ' + xhr.statusText);
-      } else {
-        alert(xhr.responseText);
-      }
-    }
-
-    xhr.ontimeout = function(){
-        alert('timeout')
-    }
-}
-
-document.getElementById('test-send').addEventListener('click', function(){
-    sendTestData();
-});

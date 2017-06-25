@@ -93,6 +93,11 @@ html, body{
     background-color: #fff;
 }
 
+.text-input__input_error{
+    border-color: red;
+    background-color: rgba(255, 0, 0, .3);
+}
+
 .blue-text{
     color: #0070c9;
     font-size: inherit;
@@ -164,7 +169,7 @@ html, body{
 
 .screen-1__title_sub{
     top: calc(50% - 3rem);
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: 100;
 }
 
@@ -173,7 +178,7 @@ html, body{
 .screen-1__buttons{
     display: block;
     position: absolute;
-    top: calc(50% - 0rem);
+    top: calc(50% + 1rem);
     left: 50%;
     transform: translate(-50%, -50%);
     height: auto;
@@ -219,6 +224,7 @@ html, body{
     text-align: center;
     padding: 5rem 0;
     padding-bottom: 1px;
+    transition: .2s all;
 }
 
 
@@ -509,7 +515,7 @@ html, body{
     width: calc(100% - 18rem);
     height: 100%;
     left: -5rem;
-    transition: .2s all;
+    transition: .4s all;
 }
 
 .screen-2__map-container_visible{
@@ -521,15 +527,14 @@ html, body{
     display: block;
     position: absolute;
     width: auto;
-    left: 50%;
+    right: 50%;
     top: 50%;
-    transform: translate(-50%, -50%);
-    transition: .2s all;
+    transform: translate(50%, -50%);
+    transition: .4s all;
 }
 
 .screen-2__order-container_right{
     right: 0;
-    left: auto;
     transform: translate(0, -50%);
 }
 
