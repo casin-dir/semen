@@ -1,0 +1,74 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Client address</title>
+</head>
+<body>
+<div id="map"></div>
+<input type="hidden" id="coords-1" value="55.85396">
+<input type="hidden" id="coords-2" value="37.720393">
+<script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+<style>
+    #map{
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+</style>
+<script>
+var Map = {};
+
+Map.init = function(){
+    var self = this;
+
+    self.clientCoords = [
+        parseFloat(document.getElementById('coords-1').value), 
+        parseFloat(document.getElementById('coords-2').value)
+    ];
+
+    self.map = new ymaps.Map('map', {
+        center: self.clientCoords,
+        zoom: 10,
+        controls: ['zoomControl', 'searchControl', 'geolocationControl', 'routeEditor', 'trafficControl']
+    }, {});
+
+
+    var geolocation = ymaps.geolocation;
+    
+    geolocation.get({
+        provider: 'browser',
+        mapStateAutoApply: true
+    }).then(function (result) {
+        self.coords = result.geoObjects.position;
+        ymaps.route([
+            self.coords,
+            self.clientCoords
+        ], {
+            mapStateAutoApply: true
+        }).then(function (route) {
+            route.getPaths().options.set({
+                balloonContentBodyLayout: ymaps.templateLayoutFactory.createClass('$[properties.humanJamsTime]'),
+                 strokeColor: '0000ffff',
+                 opacity: 0.9
+             });
+             self.map.geoObjects.add(route);
+         });
+    });
+}
+
+
+
+
+
+
+function ready() {
+    ymaps.ready(Map.init);
+};
+
+document.addEventListener("DOMContentLoaded", ready);
+</script>
+</body>
+</html>
