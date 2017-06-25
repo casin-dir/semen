@@ -7,7 +7,4 @@ class RepairPartAdmin(admin.ModelAdmin):
     list_filter = ('name',)
 
 
-
-
-
 admin.site.register(RepairParts, RepairPartAdmin)
