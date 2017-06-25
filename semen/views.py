@@ -25,6 +25,7 @@ def total_cost(id):
     cost += crash.abs_cost
     return int(cost)
 
+
 def total_time(id):
     time = 0
     crash = Crash.objects.get(id=id)
@@ -33,6 +34,7 @@ def total_time(id):
         time += rp.time_to_repair
 
     return int(time)
+
 
 class Landing(View):
     def get(self, request):
@@ -63,7 +65,6 @@ class Landing(View):
 
 
 class NewOrder(View):
-
     def post(self, request):
         data = json.loads(self.request.body.decode('utf8'))
         crashes = []
@@ -73,8 +74,8 @@ class NewOrder(View):
         total_cost = self.total(crashes)
         order = Order(
             date=timezone.now(),
-            device=Crash.objects.get(id=1).device,
-            address=data['address'],
+            device=crashes[0].device,
+            address=self.get_map(data['coords']),
             phone=data['phone'],
             name=data['name'],
             travel_time=0,
@@ -93,6 +94,22 @@ class NewOrder(View):
         cost = 0
 
         for crash in crashes:
-            cost +=total_cost(crash.id)
+            cost += total_cost(crash.id)
 
         return cost
+
+    def get_map(self,coords):
+        if coords:
+            return '/map?coord1={}&coord2={}'.format(coords[0],coords[1])
+        else:
+            return 'Не указано'
+
+
+class MapView(View):
+    def get(self,request):
+        coord1 = self.request.GET['coord1']
+        coord2 = self.request.GET['coord2']
+
+        return render(request,'map.html',{'coord1':coord1,
+                                          'coord2': coord2
+                                          })

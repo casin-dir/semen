@@ -34,6 +34,8 @@ class Order(Model):
     def get_crashes(self):
         return ", ".join([str(cr) for cr in self.crashes.all()])
 
+    get_crashes.short_description = 'Поломки'
+
 @receiver(pre_save, sender=Order)
 def add_score(instance, **kwargs):
     handled = instance.handled

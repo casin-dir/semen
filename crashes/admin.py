@@ -4,15 +4,8 @@ from crashes.models import Crash
 
 
 class CrashAdmin(admin.ModelAdmin):
-    list_display = ('id','name', 'device', 'rps', 'percent_cost', 'abs_cost')
+    list_display = ('id', 'name', 'device', 'get_rps', 'percent_cost', 'abs_cost')
     list_filter = ('name',)
-
-    def rps(self,obj):
-        return 'ХУЙ'
-
-
-
-
 
 
 admin.site.register(Crash, CrashAdmin)
