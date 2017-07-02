@@ -301,6 +301,22 @@ html, body{
     padding: 5rem 0;
     padding-bottom: 1px;
     transition: .2s all;
+    overflow: visible;
+}
+
+#screen-2__special-image-for-vovan{
+    display: block;
+    position: absolute;
+    top: 32rem;
+    /*top: 15rem;*/
+    left: -5rem;
+    height: 30rem;
+    width: 30rem;
+    z-index: 1;
+    background-image: url('../images/iphone-gm.jpg');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 
@@ -310,6 +326,7 @@ html, body{
     position: relative;
     width: calc(100% - 10rem);
     margin: 0 auto 5rem auto;
+    z-index: 100;
 }
 
 .screen-2__step_visible{
@@ -408,6 +425,7 @@ html, body{
     float: left;
 
     box-shadow: 0 0 3rem rgba(0,0,0, .15);
+    background-color: #fff;
 }
 
 .screen-2__device-type:last-of-type{
@@ -494,6 +512,8 @@ html, body{
     cursor: pointer;
     transition: .2s all;
     opacity: .75;
+
+    background-color: #fff;
 }
 
 .screen-2__device-name:hover{
@@ -653,6 +673,7 @@ html, body{
 #map{
     height: 30rem;
     background-color: #fff; 
+    box-shadow: 0 0 5rem rgba(0,0,0, .15);
 }
 
 
@@ -687,7 +708,7 @@ html, body{
 
 .screen-3{
     height: auto;
-    background-color: #fff;
+    background-color: transparent;
     padding: 4rem;
     text-align: center;
 
@@ -695,6 +716,8 @@ html, body{
     background-position: right center;
     background-size: contain;
     background-repeat: no-repeat;
+
+    z-index: 100;
 }
 
 
@@ -798,10 +821,10 @@ html, body{
     text-align: center;
 
 
-    background-image: url('../images/ipad-gm.png'), url('../images/iphone-gm.png');
-    background-position: left top, right bottom;
-    background-size: 30rem, 15rem;
-    background-repeat: no-repeat, no-repeat;
+    background-image: url('../images/ipad-gm.png');
+    background-position: left bottom;
+    background-size: 30rem;
+    background-repeat: no-repeat;
 }
 
 
