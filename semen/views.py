@@ -1,10 +1,13 @@
 import json
+
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.http import HttpResponseBadRequest
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.utils import timezone
+from django.utils.decorators import method_decorator
 from django.views import View
 
 from crashes.models import Crash
@@ -59,7 +62,6 @@ class NewOrder(View):
             address=get_map(data['coords']),
             phone=data['phone'],
             name=data['name'],
-            travel_time=0,
             total_cost=total_cost,
             status='NEW'
 
@@ -77,16 +79,22 @@ class NewOrder(View):
 
 
 class MapView(View):
-    def get(self, request):
-        coord1 = self.request.GET['coord1']
-        coord2 = self.request.GET['coord2']
 
-        return render(request, 'map.html', {'coord1': coord1,
+    @method_decorator(login_required)
+    def get(self, request):
+        if self.request.GET['coord1']:
+            coord1 = self.request.GET['coord1']
+            coord2 = self.request.GET['coord2']
+
+            return render(request, 'map.html', {'coord1': coord1,
                                             'coord2': coord2
                                             })
+        else:
+            return HttpResponseBadRequest
 
 
 class TokenView(View):
+
     def post(self, *args, **kwargs):
 
         data = json.loads(self.request.body.decode('utf8'))
