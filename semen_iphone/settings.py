@@ -13,8 +13,9 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+from configparser import ConfigParser
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
@@ -22,15 +23,25 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 't=d($nb1xup53uunryhc3-bd8x4_@flwvy1x^uznm1%%i!8f(&'
 
+PLATFORM_CONFIG_NAME = "goodmaster.conf"
+
+production_config = os.path.join('/etc', 'analytics', PLATFORM_CONFIG_NAME)
+development_config = os.path.join(BASE_DIR, PLATFORM_CONFIG_NAME)
+config_path = production_config if os.path.exists(production_config) else development_config
+config = ConfigParser()
+config.read(config_path)
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
+SITE_URL = config.get('common', 'SITE_URL', fallback='http://127.0.0.1:8000')
 
 # Application definition
 
 INSTALLED_APPS = [
+    'django_q',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -76,7 +87,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'semen_iphone.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
@@ -96,7 +106,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 
@@ -115,7 +124,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
@@ -129,9 +137,18 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
 
+FCM_KEY = 'AAAAk_j4Yi8:APA91bGLAlHA5QGwAsduXIYhHln_wZ09SkV19XZhn2fq2agWULtFxNvUhOck7bKgj8K1zI-yYyGFIco8hJPgke5ENjz9H1I_j_6wqwI1XXmfzWwKQldBBhEq3o_jHuDkcXUPG2uiYAJu'
+Q_CLUSTER = {
+    'name': 'DjangORM',
+    'workers': 1,
+    'timeout': 90,
+    'retry': 120,
+    'queue_limit': 50,
+    'bulk': 10,
+    'orm': 'default'
+}

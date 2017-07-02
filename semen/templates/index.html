@@ -354,6 +354,11 @@
 
 <div class="modal-window">Modal here</div>
 
+{% if isLoggedIn %}
+<meta name="sw" content="{% static 'js/service-worker.js' %}">
+<link rel="manifest" href="{% static 'js/manifest.json' %}">
+<script src="{% static 'js/firebase.js' %}"></script>
+{% endif %}
 <script src="//api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
 <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
 </body>

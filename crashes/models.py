@@ -13,7 +13,7 @@ class Crash(Model):
     name = models.CharField(max_length=255, default=None, blank=True, verbose_name=u'Название поломки')
     device = models.ForeignKey(Device, blank=True, null=True, default=None, verbose_name=u'Устройство')
     rps = models.ManyToManyField(RepairParts, blank=True, verbose_name=u'Детали')
-    percent_cost = models.IntegerField(default=0, verbose_name='Процент работы')
+    # percent_cost = models.IntegerField(default=0, verbose_name='Процент работы')
     abs_cost = models.IntegerField(default=0, verbose_name='Стоимость работы')
     url = models.CharField(max_length=255, default=None, blank=True, verbose_name=u'Картинка')
 

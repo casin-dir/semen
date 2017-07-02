@@ -1,10 +1,10 @@
-window.requestAnimFrame = (function(){
-  return  window.requestAnimationFrame       ||
-          window.webkitRequestAnimationFrame ||
-          window.mozRequestAnimationFrame    ||
-          function( callback ){
+window.requestAnimFrame = (function () {
+    return window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        function (callback) {
             window.setTimeout(callback, 1000 / 60);
-          };
+        };
 })();
 
 function scrollToY(scrollTargetY, speed, easing) {
@@ -18,19 +18,19 @@ function scrollToY(scrollTargetY, speed, easing) {
     var time = Math.max(.1, Math.min(Math.abs(scrollY - scrollTargetY) / speed, .8));
 
     var easingEquations = {
-            easeOutSine: function (pos) {
-                return Math.sin(pos * (Math.PI / 2));
-            },
-            easeInOutSine: function (pos) {
-                return (-0.5 * (Math.cos(Math.PI * pos) - 1));
-            },
-            easeInOutQuint: function (pos) {
-                if ((pos /= 0.5) < 1) {
-                    return 0.5 * Math.pow(pos, 5);
-                }
-                return 0.5 * (Math.pow((pos - 2), 5) + 2);
+        easeOutSine: function (pos) {
+            return Math.sin(pos * (Math.PI / 2));
+        },
+        easeInOutSine: function (pos) {
+            return (-0.5 * (Math.cos(Math.PI * pos) - 1));
+        },
+        easeInOutQuint: function (pos) {
+            if ((pos /= 0.5) < 1) {
+                return 0.5 * Math.pow(pos, 5);
             }
-        };
+            return 0.5 * (Math.pow((pos - 2), 5) + 2);
+        }
+    };
 
     function tick() {
         currentTime += 1 / 60;
@@ -53,7 +53,7 @@ function scrollToY(scrollTargetY, speed, easing) {
 // markup
 var Markup = {};
 
-Markup.fitFontSize = function() {
+Markup.fitFontSize = function () {
     var currentWidth = window.innerWidth;
     var currentHeight = window.innerHeight;
     var initScale = 20;
@@ -62,18 +62,18 @@ Markup.fitFontSize = function() {
     var currentScale = Math.min(widthScale, heightScale);
     var fontSize = currentScale * initScale;
     document.documentElement.style.fontSize = fontSize + 'px';
-}
+};
 
-Markup.init = function() {
-  this.fitFontSize();
-  window.addEventListener('resize', this.fitFontSize);
-}
+Markup.init = function () {
+    this.fitFontSize();
+    window.addEventListener('resize', this.fitFontSize);
+};
 
 //UI
 
 var UI = {};
 
-UI.init = function(){
+UI.init = function () {
     var self = this;
 
     this.data = {};
@@ -148,72 +148,72 @@ UI.init = function(){
 
     for (var i = 0; i < this.html.types.length; i++) {
         var typeBlock = this.html.types[i];
-        typeBlock.addEventListener('click', function(){
+        typeBlock.addEventListener('click', function () {
             self.onSelectType(this);
         })
     }
 
     for (var i = 0; i < this.html.names.length; i++) {
         var nameBlock = this.html.names[i];
-        nameBlock.addEventListener('click', function(){
+        nameBlock.addEventListener('click', function () {
             self.onSelectName(this);
         })
     }
 
     for (var i = 0; i < this.html.crashes.length; i++) {
         var crashBlock = this.html.crashes[i];
-        crashBlock.addEventListener('click', function(){
+        crashBlock.addEventListener('click', function () {
             self.onSelectCrash(this);
         })
     }
 
-    self.html.buttonSelectedCrashes.addEventListener('click', function(){
+    self.html.buttonSelectedCrashes.addEventListener('click', function () {
         self.onClickReady();
-    })
+    });
 
-    self.html.showMapCheckbox.addEventListener('click', function(){
+    self.html.showMapCheckbox.addEventListener('click', function () {
         self.data.device.showMap = !self.data.device.showMap;
         self.updateMapVisibility();
         // Map.userGeolocation();
-    })
+    });
 
-    self.html.buttonOrder.addEventListener('click', function(){
+    self.html.buttonOrder.addEventListener('click', function () {
         self.onOrder();
-    })
+    });
 
 
-    this.html.clientName.onkeypress = function(e){
-        var re =  /[A-Za-zА-Яа-я]/;
+    this.html.clientName.onkeypress = function (e) {
+        var re = /[A-Za-zА-Яа-я]/;
         if (!re.test(e.key)) {
             e.preventDefault();
         }
-    }
+    };
 
-    this.html.clientPhone.onkeypress = function(e){
+    this.html.clientPhone.onkeypress = function (e) {
         var re = /[\d]/;
-        if(!re.test(e.key)){
+        if (!re.test(e.key)) {
             e.preventDefault();
         }
-    }
+    };
 
-    this.html.clientName.onfocus = function(){
+    this.html.clientName.onfocus = function () {
         self.html.clientName.classList.remove(self.errorTextInputClass);
-    }
+    };
 
-    this.html.clientPhone.onfocus = function(){
+    this.html.clientPhone.onfocus = function () {
         self.html.clientPhone.classList.remove(self.errorTextInputClass);
-    }
+    };
 
-    this.html.calculateCostBtn.addEventListener('click', function(){
+    this.html.calculateCostBtn.addEventListener('click', function () {
         self.updateScrollPosition(self.html.step1);
     });
 
-    this.html.requestCallBtn.addEventListener('click', function(){
-        
-    });
-}
+    this.html.requestCallBtn.addEventListener('click', function () {
 
-UI.resetCurrentType = function(){
+    });
+};
+
+UI.resetCurrentType = function () {
     var self = this;
 
     if (self.html.currentType) {
@@ -221,9 +221,9 @@ UI.resetCurrentType = function(){
     }
     this.data.device.type = null;
     self.html.currentType = null;
-}
+};
 
-UI.resetCurrentName = function(hideContainer){
+UI.resetCurrentName = function (hideContainer) {
     var self = this;
 
     if (hideContainer) {
@@ -235,15 +235,15 @@ UI.resetCurrentName = function(hideContainer){
         self.html.currentNamesContainer = null;
     }
 
-    if(self.html.currentName){
+    if (self.html.currentName) {
         self.html.currentName.classList.remove(self.activeNameClass);
     }
 
     self.html.currentName = null;
     self.data.device.name = null;
-}
+};
 
-UI.resetCurrentCrashes = function(hideContainer){
+UI.resetCurrentCrashes = function (hideContainer) {
     var self = this;
 
     if (hideContainer) {
@@ -264,9 +264,9 @@ UI.resetCurrentCrashes = function(hideContainer){
     self.data.device.crashes = [];
     self.updateCrashesDesc();
     self.html.map.classList.remove(self.showStepClass);
-}
+};
 
-UI.onSelectType = function(typeBlock){
+UI.onSelectType = function (typeBlock) {
     var self = this;
 
     self.resetCurrentType();
@@ -278,7 +278,7 @@ UI.onSelectType = function(typeBlock){
 
     self.data.device.type = typeBlock.getAttribute('device-type-btn');
 
-    for(var i = 0; i < self.html.namesContainers.length; i++){
+    for (var i = 0; i < self.html.namesContainers.length; i++) {
         var nameContainer = self.html.namesContainers[i];
         var deviceTypeId = nameContainer.getAttribute('device-type-id');
 
@@ -290,9 +290,9 @@ UI.onSelectType = function(typeBlock){
     }
 
     self.updateScrollPosition(this.html.step2);
-}
+};
 
-UI.onSelectName = function(nameBlock){
+UI.onSelectName = function (nameBlock) {
     var self = this;
 
     self.resetCurrentName(false);
@@ -315,9 +315,9 @@ UI.onSelectName = function(nameBlock){
     }
 
     self.updateScrollPosition(this.html.step3);
-}
+};
 
-UI.onSelectCrash = function(crashBlock){
+UI.onSelectCrash = function (crashBlock) {
     var self = this;
 
     var crashId = crashBlock.getAttribute('device-crash-btn');
@@ -325,7 +325,7 @@ UI.onSelectCrash = function(crashBlock){
 
     if (crashIndex >= 0) {
         self.data.device.crashes.splice(crashIndex, 1);
-    }else{
+    } else {
         self.data.device.crashes.push(crashId);
     }
 
@@ -334,23 +334,23 @@ UI.onSelectCrash = function(crashBlock){
     if (crashIndex >= 0) {
         var oldCrashBlock = self.html.currentCrashes.splice(crashIndex, 1)[0];
         oldCrashBlock.classList.remove(self.activeCrashClass);
-    }else{
+    } else {
         crashBlock.classList.add(self.activeCrashClass);
         self.html.currentCrashes.push(crashBlock);
     }
 
     self.updateCrashesDesc();
-}
+};
 
-UI.updateCrashesDesc = function(){
+UI.updateCrashesDesc = function () {
 
-    function getPrefixMinutes(minutes){
+    function getPrefixMinutes(minutes) {
         var prefixes = {
             '1': 'минуту',
             '2': 'минуты',
             '3': 'минуты',
             '4': 'минуты',
-        }
+        };
 
         if (minutes >= 10 & minutes <= 20) {
             return 'минут';
@@ -360,13 +360,13 @@ UI.updateCrashesDesc = function(){
         return prefixes[remnant] || 'минут';
     }
 
-    function getPrefixHours(hours){
+    function getPrefixHours(hours) {
         var prefixes = {
             '1': 'час',
             '2': 'часа',
             '3': 'часа',
             '4': 'часа',
-        }
+        };
 
         if (hours >= 10 & hours <= 20) {
             return 'часов';
@@ -380,7 +380,7 @@ UI.updateCrashesDesc = function(){
 
     self.html.map.classList.remove(self.showStepClass);
 
-    if (self.html.currentCrashes.length === 0){
+    if (self.html.currentCrashes.length === 0) {
         self.html.crashesDesc.classList.remove(self.showDeviceDescClass);
         self.html.buttonSelectedCrashes.classList.remove(self.showCrashesSelectedButtonClass);
         return;
@@ -403,21 +403,21 @@ UI.updateCrashesDesc = function(){
     var hours = Math.floor(totalTime / 60);
 
     if (hours > 0) {
-        var minutes = totalTime - 60*hours;
+        var minutes = totalTime - 60 * hours;
 
         if (minutes === 0) {
             self.html.deviceCrashTime.innerHTML = hours + ' ' + getPrefixHours(hours);
-        }else{
+        } else {
             self.html.deviceCrashTime.innerHTML = hours + ' ' + getPrefixHours(hours) + ' ' + minutes + ' ' + getPrefixMinutes(minutes);
         }
-    }else{
+    } else {
         self.html.deviceCrashTime.innerHTML = totalTime + ' ' + getPrefixMinutes(totalTime);
     }
 
     self.html.deviceCrashCost.innerHTML = totalCost + ' ₽';
-}
+};
 
-UI.onClickReady = function(){
+UI.onClickReady = function () {
     var self = this;
     self.html.map.classList.add(this.showStepClass);
     self.html.buttonSelectedCrashes.classList.remove(this.showCrashesSelectedButtonClass);
@@ -426,16 +426,16 @@ UI.onClickReady = function(){
         Map.userGeolocation();
     }
     self.updateScrollPosition(this.html.step4);
-}
+};
 
-UI.updateMapVisibility = function(){
+UI.updateMapVisibility = function () {
     var self = this;
 
     if (self.data.device.showMap) {
         self.html.orderForm.classList.add(self.rightOrderFormClass);
         self.html.mapContainer.classList.add(self.showMapClass);
         self.html.showMapCheckbox.classList.add(self.activeCheckboxClass);
-    }else{
+    } else {
         self.html.orderForm.classList.remove(self.rightOrderFormClass);
         self.html.mapContainer.classList.remove(self.showMapClass);
         self.html.showMapCheckbox.classList.remove(self.activeCheckboxClass);
@@ -444,9 +444,9 @@ UI.updateMapVisibility = function(){
     if (Map.map) {
         Map.map.container.fitToViewport();
     }
-}
+};
 
-UI.onOrder = function(){
+UI.onOrder = function () {
 
     var error = false;
 
@@ -482,46 +482,46 @@ UI.onOrder = function(){
         crashes: this.data.device.crashes
     }));
 
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState != 4) return;
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState != 4) return;
 
-      if (xhr.status != 200) {
-        alert(xhr.status + ': ' + xhr.statusText);
-      } else {
-        alert(xhr.responseText);
-      }
-    }
+        if (xhr.status != 200) {
+            alert(xhr.status + ': ' + xhr.statusText);
+        } else {
+            alert(xhr.responseText);
+        }
+    };
 
-    xhr.ontimeout = function(){
+    xhr.ontimeout = function () {
         alert('timeout');
     }
-}
+};
 
-UI.updateScrollPosition = function(elem){
+UI.updateScrollPosition = function (elem) {
 
     function calculateScrollOffset(elem, additionalOffset, alignment) {
-      var body = document.body,
-          html = document.documentElement;
+        var body = document.body,
+            html = document.documentElement;
 
-      var elemRect = elem.getBoundingClientRect();
-      var clientHeight = html.clientHeight;
-      var documentHeight = Math.max( body.scrollHeight, body.offsetHeight, 
-                                     html.clientHeight, html.scrollHeight, html.offsetHeight );
+        var elemRect = elem.getBoundingClientRect();
+        var clientHeight = html.clientHeight;
+        var documentHeight = Math.max(body.scrollHeight, body.offsetHeight,
+            html.clientHeight, html.scrollHeight, html.offsetHeight);
 
-      additionalOffset = additionalOffset || 0;
+        additionalOffset = additionalOffset || 0;
 
-      var scrollPosition;
-      if (alignment === 'bottom') {
-        scrollPosition = elemRect.bottom - clientHeight;
-      } else if (alignment === 'middle') {
-        scrollPosition = elemRect.bottom - clientHeight / 2 - elemRect.height / 2;
-      } else { // top and default
-        scrollPosition = elemRect.top;
-      }
+        var scrollPosition;
+        if (alignment === 'bottom') {
+            scrollPosition = elemRect.bottom - clientHeight;
+        } else if (alignment === 'middle') {
+            scrollPosition = elemRect.bottom - clientHeight / 2 - elemRect.height / 2;
+        } else { // top and default
+            scrollPosition = elemRect.top;
+        }
 
-      var maxScrollPosition = documentHeight - clientHeight;
-      return Math.min(scrollPosition + additionalOffset + window.pageYOffset,
-                      maxScrollPosition);
+        var maxScrollPosition = documentHeight - clientHeight;
+        return Math.min(scrollPosition + additionalOffset + window.pageYOffset,
+            maxScrollPosition);
     }
 
     scrollToY(calculateScrollOffset(elem, 0, 'middle'), 1000, 'easeInOutSine');
@@ -531,13 +531,13 @@ UI.updateScrollPosition = function(elem){
 // Map
 var Map = {};
 
-Map.saveCoords = function (){ 
+Map.saveCoords = function () {
     var self = Map;
     if (self.coords) {
-        var newCoords = [self.coords[0].toFixed(6), self.coords[1].toFixed(6)];  
+        var newCoords = [self.coords[0].toFixed(6), self.coords[1].toFixed(6)];
         self.userPlacemark.geometry.setCoordinates(newCoords);
     }
-}
+};
 
 Map.init = function () {
     var self = Map;
@@ -555,26 +555,26 @@ Map.init = function () {
 
     self.searchControl = self.map.controls.get('searchControl');
     self.searchControl.options.set('float', 'left');
-    self.searchControl.options.set('noPlacemark' , true);
+    self.searchControl.options.set('noPlacemark', true);
 
-    self.userPlacemark = new ymaps.Placemark([55.76, 37.64],{}, {
+    self.userPlacemark = new ymaps.Placemark([55.76, 37.64], {}, {
         iconLayout: 'default#image',
         iconImageHref: '/static/icons/placemark.svg',
         iconImageSize: [50, 50],
         iconImageOffset: [-25, -50],
-        draggable: true 
-    }); 
+        draggable: true
+    });
 
-    self.map.geoObjects.add(self.userPlacemark);      
+    self.map.geoObjects.add(self.userPlacemark);
 
     //Отслеживаем событие перемещения метки
-    self.userPlacemark.events.add("dragend", function (e) {            
+    self.userPlacemark.events.add("dragend", function (e) {
         self.coords = this.geometry.getCoordinates();
         self.saveCoords();
     }, self.userPlacemark);
 
     //Отслеживаем событие щелчка по карте
-    self.map.events.add('click', function (e) {        
+    self.map.events.add('click', function (e) {
         self.coords = e.get('coords');
         self.saveCoords();
     });
@@ -583,24 +583,24 @@ Map.init = function () {
         self.coords = self.searchControl.getResultsArray()[0].geometry.getCoordinates();
         self.saveCoords();
     });
- 
+
     //Ослеживаем событие изменения области просмотра карты - масштаб и центр карты
     self.map.events.add('boundschange', function (event) {
-        if (event.get('newZoom') != event.get('oldZoom')) {     
+        if (event.get('newZoom') != event.get('oldZoom')) {
             self.saveCoords();
         }
 
-        if (event.get('newCenter') != event.get('oldCenter')) {    
+        if (event.get('newCenter') != event.get('oldCenter')) {
             self.saveCoords();
         }
     });
-}
+};
 
-Map.userGeolocation = function() {
+Map.userGeolocation = function () {
     var self = this;
 
     var geolocation = ymaps.geolocation;
-        
+
     geolocation.get({
         provider: 'yandex',
         mapStateAutoApply: true
@@ -618,20 +618,24 @@ Map.userGeolocation = function() {
         self.saveCoords();
         self.map.setCenter(self.coords, 18);
     });
-}
+};
+
+
+
 
 
 function ready() {
     Markup.init();
     UI.init();
     ymaps.ready(Map.init);
+    try {
+        __PushNotifications.init();
+    } catch (e){
+
+    }
 };
 
 document.addEventListener("DOMContentLoaded", ready);
-
-
-
-
 
 
 // https://yandex.ru/maps/?ll=37.685199%2C55.800577&z=12&ol=geo&mode=routes&rtext=55.788714%2C37.790972~55.821254%2C37.570959&rtt=auto
