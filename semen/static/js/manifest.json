@@ -1,0 +1,11 @@
+{
+  "name": "Goodmaster",
+  "short_name": "Goodmaster",
+  "lang": "ru-RU",
+  "orientation": "portrait",
+  "theme_color": "#168DE2",
+  "background_color": "#F0F0F0",
+  "start_url": "/",
+  "display": "standalone",
+  "gcm_sender_id": "103953800507"
+}

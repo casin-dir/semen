@@ -7,14 +7,13 @@ from repairparts.models import RepairParts
 
 
 class DeviceAdmin(admin.ModelAdmin):
-    list_display = ('name','type')
+    list_display = ('name', 'type')
     list_filter = ('name',)
+
 
 class TypeAdmin(admin.ModelAdmin):
     list_display = ('type',)
     list_filter = ('type',)
-
-
 
 
 admin.site.register(Type, TypeAdmin)
