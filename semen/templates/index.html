@@ -45,9 +45,14 @@
         </div>
 
         <div class="screen-1__social">
-            <a href="" class="screen-1__social-link"></a>
-            <a href="" class="screen-1__social-link"></a>
-            <a href="" class="screen-1__social-link"></a>
+            <a href="" class="screen-1__social-link" 
+            id="screen-1__social-vk"></a>
+            <a href="" class="screen-1__social-link"
+            id="screen-1__social-telegram"
+            ></a>
+            <a href="" class="screen-1__social-link"
+            id="screen-1__social-instagram"
+            ></a>
         </div>
     </div>
 
@@ -65,7 +70,6 @@
                         <div 
                             class="screen-2__device-type-img"
                             style="background-image: url('{{ prepath }}/{{ item.type }}.png')"
-                            id="device__iphone"
                         ></div>
                         <div class="screen-2__device-type-name">
                             {{ item.type }}
@@ -113,6 +117,8 @@
                                 crash-time="{{ crash.time }}"
                             >
                                 <div class="screen-2__crash-icon" style="background-image: url('../static/images/std-icon.svg');"></div>
+
+                                <div class="screen-2__crash-icon_selected" style="background-image: url('../static/images/std-icon_white.svg');"></div>
                                 <div 
                                 class="screen-2__crash-name">
                                     {{ crash.name }}
@@ -243,9 +249,101 @@
             </div>
         </div>
     </div>
-    <!-- <div class="screen screen-4">
-        <h3 class="screen-4__title">Топовые мастера</h3>
-    </div> -->
+    <div class="screen screen-4">
+        <h3 class="screen-4__title">Отзывы</h3>
+
+        <div class="screen-4__comments">
+            <div class="screen-4__comments_side">
+
+
+
+                <a href="">
+                <div class="screen-4__comment">
+                    <div class="screen-4__comment-left">
+                        <div class="screen-4__comment-img"></div>
+                    </div><!--
+                    --><div class="screen-4__comment-right">
+                        <a href="" class="screen-4__comment-link">Антон Чащин</a>
+                        <div class="screen-4__comment-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi delectus excepturi in rem aliquam animi quis cum. Aut labore, vitae minima laborum. At ullam doloremque, ratione ea animi ab sint.</div>
+                    </div>
+
+                </div>
+                </a>
+
+                <a href="">
+                <div class="screen-4__comment">
+                    <div class="screen-4__comment-left">
+                        <div class="screen-4__comment-img"></div>
+                    </div><!--
+                    --><div class="screen-4__comment-right">
+                        <a href="" class="screen-4__comment-link">Антон Чащин</a>
+                        <div class="screen-4__comment-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa tempora, voluptas voluptate, veritatis vitae assumenda. Officia dolore non, iste magnam tempore hic quia voluptas, placeat, excepturi vitae totam neque odio?</div>
+                    </div>
+
+                </div>
+                </a>
+
+                <a href="">
+                <div class="screen-4__comment">
+                    <div class="screen-4__comment-left">
+                        <div class="screen-4__comment-img"></div>
+                    </div><!--
+                    --><div class="screen-4__comment-right">
+                        <a href="" class="screen-4__comment-link">Антон Чащин</a>
+                        <div class="screen-4__comment-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus quo necessitatibus, quisquam, ad quasi repudiandae quibusdam ullam error harum nulla delectus voluptate tenetur officia natus, reiciendis deleniti maxime possimus distinctio.</div>
+                    </div>
+
+                </div>
+                </a>
+
+
+
+
+
+            </div><!--
+            --><div class="screen-4__comments_side">
+
+                <a href="">
+                <div class="screen-4__comment">
+                    <div class="screen-4__comment-left">
+                        <div class="screen-4__comment-img"></div>
+                    </div><!--
+                    --><div class="screen-4__comment-right">
+                        <a href="" class="screen-4__comment-link">Антон Чащин</a>
+                        <div class="screen-4__comment-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum facilis quasi minus recusandae accusamus perspiciatis voluptate fugiat quisquam sed corrupti in, dolore enim et, dignissimos distinctio illum eius repellat cumque.</div>
+                    </div>
+
+                </div>
+                </a>
+
+                <a href="">
+                <div class="screen-4__comment">
+                    <div class="screen-4__comment-left">
+                        <div class="screen-4__comment-img"></div>
+                    </div><!--
+                    --><div class="screen-4__comment-right">
+                        <span class="screen-4__comment-link">Антон Чащин</span>
+                        <div class="screen-4__comment-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt repudiandae commodi temporibus similique voluptate nisi, quibusdam molestiae neque dignissimos, accusamus earum ipsa amet esse molestias veritatis maiores culpa animi iure?</div>
+                    </div>
+                </div>
+                </a>
+
+                <a href="">
+                <div class="screen-4__comment">
+                    <div class="screen-4__comment-left">
+                        <div class="screen-4__comment-img"></div>
+                    </div><!--
+                    --><div class="screen-4__comment-right">
+                        <a href="" class="screen-4__comment-link">Антон Чащин</a>
+                        <div class="screen-4__comment-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis inventore qui quae incidunt voluptate ex voluptatem quaerat culpa aperiam. Commodi doloremque, fuga asperiores quod numquam vel fugit nesciunt magni impedit.</div>
+                    </div>
+
+                </div>
+                </a>
+
+            </div>
+        </div>
+    </div>
 </div>
 
 

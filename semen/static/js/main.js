@@ -524,7 +524,7 @@ UI.updateScrollPosition = function(elem){
                       maxScrollPosition);
     }
 
-    scrollToY(calculateScrollOffset(elem, 0, 'top'), 1000, 'easeInOutSine');
+    scrollToY(calculateScrollOffset(elem, 0, 'middle'), 1000, 'easeInOutSine');
 }
 
 
