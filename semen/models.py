@@ -14,3 +14,6 @@ class UserToken(models.Model):
         default=None,
         verbose_name='Токен'
     )
+
+class Review(models.Model):
+    pass

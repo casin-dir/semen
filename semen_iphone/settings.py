@@ -37,6 +37,8 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 SITE_URL = config.get('common', 'SITE_URL', fallback='http://127.0.0.1:8000')
+PERCENT = config.getint('common', 'PERCENT', fallback='20')
+ADMINS = config.get('common', 'ADMINS', fallback='vladimir')
 
 # Application definition
 

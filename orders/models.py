@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import Model
 from django.db.models.signals import pre_save
@@ -5,6 +6,8 @@ from django.dispatch import receiver
 
 from crashes.models import Crash
 from devices.models import Device
+from semen.utils import send_push
+from semen_iphone import settings
 
 
 class Order(Model):
@@ -49,3 +52,17 @@ def add_score(instance, **kwargs):
                 rp.save()
         instance.handled = True
         instance.save()
+        users = User.objects.filter(username__in=settings.ADMINS.split(','))
+        for user in users:
+            send_push(user.id, 'Заказ сделан',
+                      '{} Стоимость - {}, Процент - {}'.format(instance.name, instance.total_cost,
+                                                               get_major(instance.id)))
+
+
+def get_major(order_id):
+    order = Order.objects.get(id=order_id)
+    ordercost = 0
+    for crash in order.crashes.all():
+        ordercost += crash.abs_cost * settings.PERCENT / 100
+
+    return ordercost
