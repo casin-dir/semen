@@ -2,3 +2,4 @@ django==1.11.2
 mysqlclient==1.3.10
 django-q==0.8.0
 requests==2.18.1
+python-instagram==1.3.2
