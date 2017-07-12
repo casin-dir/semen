@@ -19,7 +19,7 @@ html, body{
     border: 1px solid #ccc;
     border-radius: 1rem;
     cursor: pointer;
-    transition: .2s all;
+    transition: .2s background-image;
 }
 
 .checkbox__checkbox_active{
@@ -54,7 +54,7 @@ html, body{
     color: #0070c9;
     font-weight: 100;
     cursor: pointer;
-    transition: .2s all;
+    transition: .2s background-color, .2s color;
     margin-top: 2rem;
 }
 
@@ -77,7 +77,7 @@ html, body{
 
 .text-input__input{
     display: block;
-    /*border: 1px solid #ccc;*/
+    border: 1px solid #ccc;
     width: 100%;
     border-radius: .5rem;
     height: 2rem;
@@ -86,16 +86,16 @@ html, body{
     background-color: transparent;
     line-height: 2rem;
     color: #222;
-    transition: .2s all;
-    background-color: #fff;
-    box-shadow: 0 0 3rem rgba(0,0,0, .15);
+    transition: .2s border-color;
+    /*background-color: #fff;*/
+    /*box-shadow: 0 0 3rem rgba(0,0,0, .15);*/
 }
 
 .text-input__input:focus{
-    /*border: 1px solid #0070c9;*/
-    background-color: #000;
-    color: #fff;
-    box-shadow: none;
+    border: 1px solid #0070c9;
+    /*background-color: #000;*/
+    /*color: #fff;*/
+    /*box-shadow: none;*/
 }
 
 .text-input__input_error{
@@ -204,7 +204,7 @@ html, body{
     color: #333;
     cursor: pointer;
     border-radius: .5rem;
-    transition: .2s all;
+    transition: .2s background-color, .2s transform;
     margin-right: 1rem;
     margin-right: 1rem;
     font-weight: normal;
@@ -246,14 +246,15 @@ html, body{
     width: 2rem;
     height: 2rem;
     margin-left: 1rem;
-    border: 1px solid #333;
     border-radius: .5rem;
     margin-right: 1rem;
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     cursor: pointer;
-    transition: .2s all;
+    transition: .2s background-color;
+    background-color: #fff;
+    box-shadow: 0 0 3rem rgba(0,0,0, .15);
 }
 
 .screen-1__social-link:hover{
@@ -299,8 +300,8 @@ html, body{
     height: auto;
     text-align: center;
     padding: 5rem 0;
-    padding-bottom: 1px;
-    transition: .2s all;
+    padding-bottom: 0;
+    /*transition: .2s all;*/
     overflow: visible;
 }
 
@@ -420,7 +421,7 @@ html, body{
     border-radius: 1rem;
     background-color: transparent;
     cursor: pointer;
-    transition: .2s all;
+    transition: .2s background-color, .2s transform;
     overflow: hidden;
     float: left;
 
@@ -447,7 +448,7 @@ html, body{
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    transition: .2s all;
+    transition: .2s opacity;
     cursor: inherit;
 }
 
@@ -510,7 +511,7 @@ html, body{
     margin-left: 1rem;
     margin-bottom: 2rem;
     cursor: pointer;
-    transition: .2s all;
+    transition: .2s opacity, .2s color, .2s background-color;
     opacity: .75;
 
     background-color: #fff;
@@ -541,7 +542,7 @@ html, body{
     margin-left: 1rem;
     margin-bottom: 2rem;
     cursor: pointer;
-    transition: .2s all;
+    transition: .2s background-color, .2s transform;
     color: #444;
 
     box-shadow: 0 0 5rem rgba(0,0,0, .15);
@@ -647,7 +648,7 @@ html, body{
     width: calc(100% - 18rem);
     height: 100%;
     left: -5rem;
-    transition: .4s all;
+    transition: .4s transform, .4s opacity;
 }
 
 .screen-2__map-container_visible{
@@ -662,7 +663,7 @@ html, body{
     right: 50%;
     top: 50%;
     transform: translate(50%, -50%);
-    transition: .4s all;
+    transition: .4s transform, .4s opacity, .4s right;
 }
 
 .screen-2__order-container_right{
@@ -737,13 +738,24 @@ html, body{
 
 .screen-3__advantage{
     display: inline-block;
-    width: 10rem;
-    margin-left: 2.5rem;
-    margin-right: 2.5rem;
-    /*margin-bottom: 6rem;*/
+    width: 12.5rem;
+    margin: 0 calc(2.5rem/2);
     height: auto;
     border-radius: .5rem;
     /*background-color: rgba(255, 255, 255, .3);*/
+
+    padding: 1rem calc(2.5rem/2);
+
+    /*background-color: #fff;
+    box-shadow: 0 0 5rem rgba(0,0,0, .15);*/
+
+    transition: .2s background-color, .2s box-shadow;
+
+}
+
+.screen-3__advantage:hover{
+    background-color: #fff;
+    box-shadow: 0 0 5rem rgba(0,0,0, .15);
 }
 
 .screen-3__advantage:hover .screen-3__advantage-logo{
@@ -762,7 +774,7 @@ html, body{
     background-size: contain;
     background-repeat: no-repeat;
     border-radius: 100%;
-    transition: .3s all;
+    transition: .3s background-size;
     margin: 0 auto;
 }
 
@@ -802,7 +814,7 @@ html, body{
 .screen-3__advantage-desc{
     font-size: .9rem;
     opacity: 0;
-    transition: .2s all;
+    transition: .2s transform, .2s opacity;
     transform: translateY(-100%);
 }
 
@@ -847,9 +859,9 @@ html, body{
 .screen-4__comments_side{
     position: relative;
     display: inline-block;
-    width: 30rem;
+    width: 25rem;
     vertical-align: top;
-    padding: 1rem;
+    padding: 1rem 2rem;
 }
 
 
@@ -864,7 +876,7 @@ html, body{
     box-shadow: 0 0 5rem rgba(0,0,0, .15);
     padding: 1rem;
     border-radius: 1rem;
-    transition: .2s all;
+    transition: .2s transform;
     cursor: pointer;
 }
 
@@ -877,20 +889,20 @@ html, body{
 .screen-4__comment-right{
     display: inline-block;
     position: relative;
-    width: 6rem;
+    width: 4rem;
     vertical-align: top;
 }
 
 .screen-4__comment-left{
-    height: 6rem;
-    margin-right: 1rem;
+    height: 4rem;
+    margin-right: .5rem;
     border-radius: 100%;
     background-color: #ccc;
     overflow: hidden;
 }
 
 .screen-4__comment-right{
-    width: 17rem;
+    width: 14.3rem;
 }
 
 .screen-4__comment-link{
@@ -931,6 +943,92 @@ html, body{
     overflow: hidden !important;
     cursor: pointer;
 }
+
+
+.modal-window{
+    display: block;
+    position: fixed;
+    width: 30rem;
+    height: auto;
+    background-color: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 0 10rem rgba(0,0,0, .25);
+    z-index: 99999;
+
+    top: 50%;
+    left: 50%;
+    padding: 3rem;
+    transform: translate(-50%, 200rem);
+    transition: .5s transform;
+
+    text-align: center;
+}
+
+.modal-window_open{
+    transform: translate(-50%, -50%);
+}
+
+
+.modal-window__close-btn{
+    display: block;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+    text-align: center;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.modal-window__main-title{
+    display: block;
+    position: relative;
+    width: 100%;
+    font-size: 1.7rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.modal-window__content{
+    display: block;
+    position: relative;
+    width: 100%;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+
+.modal-window__btn{
+    display: inline-block;
+    height: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    line-height: 2rem;
+    font-size: 1rem;
+    border-radius: .5rem;
+    border: 1px solid #0070c9;
+    color: #0070c9;
+    font-weight: 100;
+    margin-top: 2rem;
+    cursor: pointer;
+    transition: .2s opacity, .2s color, .2s background-color;
+    opacity: .75;
+    background-color: #fff;
+}
+
+.modal-window__btn:hover{
+    background-color: #0070c9;
+    color: #fff;
+    opacity: 1;
+}
+
+
+
+
+
 
 
 
