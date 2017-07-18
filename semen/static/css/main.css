@@ -741,15 +741,11 @@ html, body{
     width: 12.5rem;
     margin: 0 calc(2.5rem/2);
     height: auto;
-    border-radius: .5rem;
-    /*background-color: rgba(255, 255, 255, .3);*/
-
+    border-radius: 1rem;
     padding: 1rem calc(2.5rem/2);
-
-    /*background-color: #fff;
-    box-shadow: 0 0 5rem rgba(0,0,0, .15);*/
-
     transition: .2s background-color, .2s box-shadow;
+    background-color: #fff;
+    box-shadow: 0 0 .5rem rgba(0,0,0, .15);
 
 }
 
@@ -769,18 +765,16 @@ html, body{
     width: 7rem;
     border-radius: 15rem;
     overflow: hidden;
-    /*background-color: rgba(0, 0, 0, .1);*/
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
     border-radius: 100%;
-    transition: .3s background-size;
+    transition: .3s transform;
     margin: 0 auto;
 }
 
 #screen-3-advantage-logo-1{
     background-image: url('../icons/time_black.svg');
-    /*background-size: 70%;*/
     background-size: 60%;
 }
 
@@ -813,14 +807,6 @@ html, body{
 
 .screen-3__advantage-desc{
     font-size: .9rem;
-    opacity: 0;
-    transition: .2s transform, .2s opacity;
-    transform: translateY(-100%);
-}
-
-.screen-3__advantage:hover > .screen-3__advantage-desc{
-    opacity: 1;
-    transform: translateY(0);
 }
 
 
@@ -852,7 +838,6 @@ html, body{
     position: relative;
     margin: 0 auto;
     width: 60rem;
-    height: 500px;
     margin-top: 2rem;
 }
 
@@ -1025,10 +1010,292 @@ html, body{
     opacity: 1;
 }
 
+#go-to-top-button{
+    display: none;
+    position: fixed;
+    cursor: pointer;
+    height: 3rem;
+    width: 3rem;
+    bottom: 3rem;
+    left: 3rem;
+    background-color: #fff;
+    box-shadow: 0 0 3rem rgba(0,0,0, .15);
+    border-radius: 3rem;
+    background-image: url('../icons/up-arrow_black.svg');
+    transition: .2s background, .2s transform;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 50%;
+    z-index: 999;
+}
+
+#go-to-top-button:hover{
+    transform: scale(1.03);
+}
+
+#go-to-top-button:active {
+    background-color: #000;
+    box-shadow: none;
+    background-image: url('../icons/up-arrow_white.svg');
+}
+
+
+/*MOBILE*/
+
+.mobile .screen-1__title_main{
+    top: calc(50% - 35rem);
+    line-height: 13rem;
+    font-size: 14rem;
+    font-weight: bold;
+}
+
+.mobile .screen-1__title_sub {
+    top: calc(50% - 5rem);
+    font-size: 3.5rem;
+    padding: 0 5rem;
+    font-weight: normal;
+}
+
+
+.mobile .screen-1__button {
+    display: block;
+    height: 10rem;
+    line-height: 10rem;
+    font-size: 4rem;
+    border-radius: 2rem;
+    margin: 0;
+    margin-bottom: 5rem;
+    width: 50rem;
+    font-weight: 100;
+}
+
+.mobile .screen-1__buttons {
+    top: calc(50% + 25rem);
+}
+
+.mobile .screen-1__social-link {
+    display: inline-block;
+    position: relative;
+    width: 7rem;
+    height: 7rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    border-radius: 2rem;
+}
+
+.mobile .screen-2__step-title {
+    font-size: 5rem;
+    font-weight: 100;
+}
+
+.mobile .screen-2__devices-types {
+    margin-top: 5rem;
+}
+
+.mobile .screen-2__device-type {
+    display: block;
+    position: relative;
+    width: 50rem;
+    height: 20rem;
+    margin: 0;
+    margin-bottom: 3rem;
+    float: none;
+    clear: both;
+    border-radius: 2rem;
+}
+
+.mobile .screen-2__device-type-img{
+    top: 3rem;
+    left: 2rem;
+    width: 50%;
+    height: calc(100% - 6rem);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: .2s opacity;
+    cursor: inherit;
+}
+
+.mobile .screen-2__device-type-name {
+    width: 50%;
+    right: 2rem;
+    left: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 4rem;
+    bottom: 2rem;
+    height: 4rem;
+    line-height: 4rem;
+}
+
+.mobile .screen-2__devices-names{
+    margin-top: 5rem;
+}
+
+.mobile .screen-2__device-name {
+    display: inline-block;
+    height: 5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    line-height: 5rem;
+    font-size: 2.5rem;
+    border-radius: 1rem;
+    margin-right: 1rem;
+    margin-left: 1rem;
+    margin-bottom: 4rem;
+}
+
+.mobile .screen-2__crashes-names {
+    margin-top: 5rem;
+}
+
+.mobile .screen-2__crash {
+    height: 23rem;
+    width: 23rem;
+    border-radius: 2rem;
+    margin-right: 2rem;
+    margin-left: 2rem;
+    margin-bottom: 4rem;
+}
+
+.mobile .screen-2__crash-icon,
+.mobile .screen-2__crash-icon_selected{
+    top: 2rem;
+    left: 2rem;
+    width: calc(100% - 4rem);
+    height: 7rem;
+}
+
+.mobile .screen-2__crash-name {
+    top: calc(50% - 1rem);
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+
+.mobile .screen-2__crash-cost {
+    font-size: 2.5rem;
+    margin-top: .5rem;
+    color: #0070c9;
+}
+
+.mobile .screen-2__order-description {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    font-size: 3rem;
+    color: #444;
+    z-index: 99999;
+    background-color: #fff;
+    padding: 5rem;
+    text-align: center;
+    box-shadow: -2rem 0 5rem rgba(0,0,0, .15);
+}
+
+.mobile .screen-2__order-description_visible{
+    display: block;
+}
 
 
 
 
+
+
+.mobile .screen-3__title{
+    font-size: 5rem;
+    font-weight: 100;
+}
+
+.mobile .screen-3__advantages {
+    margin-top: 5rem;
+}
+
+.mobile .screen-3__advantage {
+    display: block;
+    width: 35rem;
+    margin: 0;
+    margin-bottom: 3rem;
+    height: auto;
+    border-radius: 2rem;
+    padding: 3rem;
+    transition: .2s background-color, .2s box-shadow;
+    background-color: #fff;
+    box-shadow: 0 0 0.5rem rgba(0,0,0, .15);
+}
+
+.mobile .screen-3__advantage-logo {
+    height: 15rem;
+    width: 15rem;
+    border-radius: 15rem;
+}
+
+.mobile .screen-3__advantage-title {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-size: 3rem;
+}
+
+.mobile .screen-3__advantage-desc{
+    font-size: 2rem;
+}
+
+.mobile .screen-4__title {
+    font-size: 5rem;
+    font-weight: 100;
+}
+
+.mobile .screen-4__comments {
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 5rem;
+}
+
+.mobile .screen-4__comment {
+    margin-bottom: 3rem;
+    padding: 2rem;
+    border-radius: 2rem;
+    box-shadow: 0 0 5rem rgba(0,0,0, .15);
+}
+
+.mobile .screen-4__comments_side {
+    display: block;
+    width: 100%;
+    padding: 0;
+}
+
+.mobile .screen-4__comment-left {
+    height: 10rem;
+    width: 10rem;
+    margin-right: 2rem;
+    border-radius: 100%;
+    background-color: #ccc;
+    overflow: hidden;
+}
+
+.mobile .screen-4__comment-right {
+    width: calc(100% - 12rem);
+}
+
+.mobile .screen-4__comment-link {
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+}
+
+.mobile .screen-4__comment-text {
+    font-size: 2rem;
+}
+
+.mobile #go-to-top-button {
+    display: none !important;
+}
 
 
 
