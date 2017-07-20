@@ -64,7 +64,11 @@ html, body{
 }
 
 .button_visible{
-    display: inline-block;;
+    display: inline-block;
+}
+
+.button_visible_block{
+    display: block;
 }
 
 
@@ -817,12 +821,6 @@ html, body{
     background-color: #fff;
     padding: 4rem;
     text-align: center;
-
-
-    background-image: url('../images/ipad-gm.png');
-    background-position: left bottom;
-    background-size: 30rem;
-    background-repeat: no-repeat;
 }
 
 
@@ -837,97 +835,32 @@ html, body{
     display: block;
     position: relative;
     margin: 0 auto;
-    width: 60rem;
+    width: auto;
     margin-top: 2rem;
 }
 
 .screen-4__comments_side{
     position: relative;
     display: inline-block;
-    width: 25rem;
+    width: 50%;
     vertical-align: top;
-    padding: 1rem 2rem;
+    padding: 0;
+}
+
+.screen-4__comments_side_left{
+    padding-right: 1rem;
+}
+
+.screen-4__comments_side_right{
+    padding-left: 1rem;
 }
 
 
-.screen-4__comment{
-    display: block;
-    position: relative;
-    width: 100%;
-    height: auto;
-    text-align: left;
-    margin-bottom: 2rem;
-    background: #fff;
-    box-shadow: 0 0 5rem rgba(0,0,0, .15);
-    padding: 1rem;
-    border-radius: 1rem;
-    transition: .2s transform;
-    cursor: pointer;
+.instagram-media{
+    margin-bottom: 2rem !important;
+    transition: .2s box-shadow;
 }
 
-.screen-4__comment:hover{
-    /*background-color: #000;*/
-    transform: scale(1.03);
-}
-
-.screen-4__comment-left,
-.screen-4__comment-right{
-    display: inline-block;
-    position: relative;
-    width: 4rem;
-    vertical-align: top;
-}
-
-.screen-4__comment-left{
-    height: 4rem;
-    margin-right: .5rem;
-    border-radius: 100%;
-    background-color: #ccc;
-    overflow: hidden;
-}
-
-.screen-4__comment-right{
-    width: 14.3rem;
-}
-
-.screen-4__comment-link{
-    display: block;
-    position: relative;
-    margin-bottom: .5rem;
-    color: #0070c9;
-    text-decoration: none;
-    cursor: pointer;
-    font-size: 1rem;
-}
-
-.screen-4__comment-text{
-    border-radius: 1rem;
-    color: #000;
-    font-size: .8rem;
-    cursor: pointer;
-}
-
-.screen-4__comment:hover .screen-4__comment-text{
-    /*color: #fff;*/
-}
-
-.screen-4__comment-img{
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-
-    background-image: url('../images/test-user.jpg');
-    border-radius: 100%;
-    overflow: hidden !important;
-    cursor: pointer;
-}
 
 
 .modal-window{
@@ -1040,6 +973,21 @@ html, body{
 }
 
 
+@media (max-width: 1100px) {
+    .screen-4__comments_side{
+        display: block;
+        width: 500px;
+        padding: 0 !important;
+        margin: 0 auto;
+    }
+
+    .instagram-media{
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+}
+
+
 /*MOBILE*/
 
 .mobile .screen-1__title_main{
@@ -1062,7 +1010,7 @@ html, body{
     height: 10rem;
     line-height: 10rem;
     font-size: 4rem;
-    border-radius: 2rem;
+    border-radius: 3rem;
     margin: 0;
     margin-bottom: 5rem;
     width: 50rem;
@@ -1081,6 +1029,10 @@ html, body{
     margin-left: 2rem;
     margin-right: 2rem;
     border-radius: 2rem;
+}
+
+.mobile .screen-2{
+    z-index: 101;
 }
 
 .mobile .screen-2__step-title {
@@ -1133,16 +1085,16 @@ html, body{
 }
 
 .mobile .screen-2__device-name {
-    display: inline-block;
-    height: 5rem;
+    display: block;
+    height: 6rem;
     padding-left: 2rem;
     padding-right: 2rem;
-    line-height: 5rem;
-    font-size: 2.5rem;
-    border-radius: 1rem;
+    line-height: 6rem;
+    font-size: 3rem;
+    border-radius: 2rem;
     margin-right: 1rem;
     margin-left: 1rem;
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
 }
 
 .mobile .screen-2__crashes-names {
@@ -1203,6 +1155,60 @@ html, body{
     display: block;
 }
 
+.mobile .screen-2__button-calc-ready{
+    margin: 0 auto;
+    width: 50rem;
+    height: 6rem;
+    line-height: 6rem;
+    font-size: 3rem;
+    text-align: center;
+    border-radius: 2rem;
+    margin-top: 2rem;
+}
+
+.mobile .text-input{
+    width: 40rem;
+}
+
+.mobile .text-input__label{
+    font-size: 3rem;
+}
+
+.mobile .text-input__input{
+    height: 6rem;
+    line-height: 6rem;
+    font-size: 2.5rem;
+    border-radius: 2rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+.mobile .screen-2__map-checkbox{
+    display: none;
+}
+
+.mobile #map{
+    display: none;
+}
+
+.mobile .screen-2__order{
+    height: 60rem;
+    z-index: 1;
+}
+
+.mobile #button_order{
+    height: 6rem;
+    width: 40rem;
+    line-height: 6rem;
+    font-size: 3rem;
+    border-radius: 2rem;
+    margin-top: 3rem;
+}
+
+.mobile .screen-2__order-form{
+    margin-top: 4rem;
+}
+
 
 
 
@@ -1219,20 +1225,20 @@ html, body{
 
 .mobile .screen-3__advantage {
     display: block;
-    width: 35rem;
+    width: 50rem;
     margin: 0;
     margin-bottom: 3rem;
     height: auto;
     border-radius: 2rem;
     padding: 3rem;
-    transition: .2s background-color, .2s box-shadow;
+    transition: none;
     background-color: #fff;
     box-shadow: 0 0 0.5rem rgba(0,0,0, .15);
 }
 
 .mobile .screen-3__advantage-logo {
-    height: 15rem;
-    width: 15rem;
+    height: 20rem;
+    width: 20rem;
     border-radius: 15rem;
 }
 
@@ -1244,7 +1250,12 @@ html, body{
 }
 
 .mobile .screen-3__advantage-desc{
-    font-size: 2rem;
+    font-size: 2.5rem;
+}
+
+.mobile .screen-4{
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .mobile .screen-4__title {
@@ -1258,39 +1269,47 @@ html, body{
     margin-top: 5rem;
 }
 
-.mobile .screen-4__comment {
-    margin-bottom: 3rem;
-    padding: 2rem;
-    border-radius: 2rem;
-    box-shadow: 0 0 5rem rgba(0,0,0, .15);
-}
-
 .mobile .screen-4__comments_side {
     display: block;
     width: 100%;
     padding: 0;
 }
 
-.mobile .screen-4__comment-left {
-    height: 10rem;
-    width: 10rem;
-    margin-right: 2rem;
-    border-radius: 100%;
-    background-color: #ccc;
-    overflow: hidden;
+.mobile .screen-4__comments_side{
+    width: 100% !important;
 }
 
-.mobile .screen-4__comment-right {
-    width: calc(100% - 12rem);
+.mobile .instagram-media{
+    max-width: 90% !important;
+    width: 90% !important;
 }
 
-.mobile .screen-4__comment-link {
-    margin-bottom: 1rem;
-    font-size: 2.5rem;
+.mobile .modal-window{
+    width: 60rem;
 }
 
-.mobile .screen-4__comment-text {
-    font-size: 2rem;
+.mobile .modal-window__main-title{
+    font-size: 5rem;
+}
+
+.mobile .modal-window__content{
+    font-size: 3rem;
+    margin-top: 3rem;
+}
+
+.mobile .modal-window__btn{
+    height: 6rem;
+    margin-top: 3rem;
+    display: block;
+    line-height: 6rem;
+    border-radius: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    font-size: 3rem;
+}
+
+.mobile .modal-window__close-btn{
+    display: none;
 }
 
 .mobile #go-to-top-button {

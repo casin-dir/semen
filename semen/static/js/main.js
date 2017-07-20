@@ -129,7 +129,7 @@ UI.init = function () {
     this.modalWindowOpenClass = 'modal-window_open';
 
     this.showDeviceDescClass = 'screen-2__order-description_visible';
-    this.showCrashesSelectedButtonClass = 'button_visible';
+    this.showCrashesSelectedButtonClass = 'button_visible_block';
 
     this.showMapClass = 'screen-2__map-container_visible';
     this.rightOrderFormClass = 'screen-2__order-container_right';
