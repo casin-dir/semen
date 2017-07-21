@@ -578,7 +578,7 @@ UI.onOrder = function (isCallback) {
 
     var xhr = new XMLHttpRequest();
 
-    xhr.open('POST', '/order');
+    xhr.open('POST', (isCallback ? '/callback' : '/order'));
     xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
     xhr.timeout = 10000;
     xhr.setRequestHeader("X-CSRFToken", document.getElementsByName('csrfmiddlewaretoken')[0].value);

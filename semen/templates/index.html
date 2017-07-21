@@ -317,6 +317,11 @@
     <div class="modal-window__btn" onclick="UI.onOrder(true)" style="margin-top: 0;">Перезвоните мне</div>
 </div>
 
+<div id="__global-loader__">
+    <span id="__global-loader__text">Загрузка</span>    
+    <div id="__global-loader__loader"></div>
+</div>
+
 {% if isLoggedIn %}
 <meta name="sw" content="{% static 'js/service-worker.js' %}">
 <link rel="manifest" href="{% static 'js/manifest.json' %}">
