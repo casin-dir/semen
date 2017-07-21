@@ -149,6 +149,8 @@ UI.init = function () {
 
     this.errorTextInputClass = 'text-input__input_error';
 
+    this.globalLoaderHideClass = '__global-loader__hide';
+
     this.html = {};
 
     this.html.currentType = null;
@@ -171,6 +173,8 @@ UI.init = function () {
 
     this.html.clientNameCallback = document.getElementById('client-name-callback');
     this.html.clientPhoneCallback = document.getElementById('client-phone-callback');
+
+    this.html.globalLoader = document.getElementById('__global-loader__');
 
     this.html.orderForm = document.querySelectorAll('[select-param="order-form-contacts"]')[0];
     this.html.mapContainer = document.getElementById('map');
@@ -594,8 +598,14 @@ UI.onOrder = function (isCallback) {
         if (xhr.readyState != 4) return;
 
         if (xhr.status != 200) {
+            UI.pageState(true);
             self.openModal("bad-modal");
         } else {
+            UI.resetCurrentType();
+            UI.resetCurrentName(true);
+            UI.resetCurrentCrashes(true);
+            UI.updateScrollPosition(document.getElementById('__screen-1__'));
+            UI.pageState(true);
             self.openModal("thanks-modal");
         }
     };
@@ -603,6 +613,12 @@ UI.onOrder = function (isCallback) {
     xhr.ontimeout = function () {
         self.openModal("bad-modal");
     }
+
+    if (isCallback) {
+        self.closeModal('callback-modal');
+    }
+
+    UI.pageState(false);
 };
 
 UI.updateScrollPosition = function (elem) {
@@ -619,31 +635,13 @@ UI.closeModal = function (modalID) {
     document.getElementById(modalID).classList.remove(this.modalWindowOpenClass);
 }
 
-// UI.getMoreFeedbacks = function() {
-
-//     var xhr = new XMLHttpRequest();
-//     xhr.open('GET', '/test.feedback?limit=' + 20 + '&offset=' + 43);
-//     xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-//     xhr.timeout = 10000;
-//     xhr.setRequestHeader("X-CSRFToken", document.getElementsByName('csrfmiddlewaretoken')[0].value);
-//     xhr.send();
-//     xhr.onreadystatechange = function () {
-//         if (xhr.readyState != 4) return;
-
-//         if (xhr.status != 200) {
-//             console.log('Error');
-//         } else {
-//             var response = xhr.response;
-//             console.log(xhr);
-//             console.log($(response));
-//             $('#test-feedback-target').append($(response));
-//         }
-//     };
-
-//     xhr.ontimeout = function () {
-//         console.log('Error');
-//     }
-// }
+UI.pageState = function(isReady){
+    if (isReady) {
+        this.html.globalLoader.classList.add(this.globalLoaderHideClass);
+    }else{
+        this.html.globalLoader.classList.remove(this.globalLoaderHideClass);
+    }
+}
 
 
 // Map
@@ -765,7 +763,7 @@ function ready() {
         separator: '+7 ()-'
     });
 
-    // UI.getMoreFeedbacks();
+    setTimeout(function(){ UI.pageState(true); }, 1000);
 };
 
 document.addEventListener("DOMContentLoaded", ready);

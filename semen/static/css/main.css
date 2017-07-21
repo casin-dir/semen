@@ -68,7 +68,7 @@ html, body{
 }
 
 .button_visible_block{
-    display: block;
+    display: inline-block;
 }
 
 
@@ -973,6 +973,59 @@ html, body{
 }
 
 
+
+#__global-loader__{
+    display: block;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999999999999;
+    background-color: #fff;
+}
+
+.__global-loader__hide{
+    display: none !important;
+}
+
+#__global-loader__wrap{
+    display: block;
+    position: absolute;
+    height: auto;
+    width: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+}
+
+#__global-loader__text{
+    display: block;
+    position: relative;
+    width: 100%;
+    font-size: 2rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+#__global-loader__loader{
+    display: block;
+    position: relative;
+    width: 5rem;
+    height: 5rem;
+    margin: 1rem auto 0 auto;
+    background-image: url('../icons/spinner.gif');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+
 @media (max-width: 1100px) {
     .screen-4__comments_side{
         display: block;
@@ -1310,6 +1363,10 @@ html, body{
 
 .mobile .modal-window__close-btn{
     display: none;
+}
+
+.mobile .button_visible_block{
+    display: block;
 }
 
 .mobile #go-to-top-button {
