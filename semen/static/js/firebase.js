@@ -553,7 +553,6 @@ __PushNotifications.init = function () {
         firebase.initializeApp(config);
 
         const messaging = firebase.messaging();
-        console.log(messaging);
         const serviceWorker = navigator.serviceWorker.register(document.querySelector("meta[name='sw']").getAttribute('content')).then(function (registration) {
             messaging.useServiceWorker(registration);
 
