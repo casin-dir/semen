@@ -681,6 +681,31 @@ function ready() {
         format: '+7 (___) ___-__-__',
         separator: '+7 ()-'
     });
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.open('GET', '/test.feedback?limit=' + 20 + '&offset=' + 43);
+    xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+    xhr.timeout = 10000;
+    xhr.setRequestHeader("X-CSRFToken", document.getElementsByName('csrfmiddlewaretoken')[0].value);
+
+    xhr.send();
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState != 4) return;
+
+        // if (xhr.status != 200) {
+        //     self.openModal("bad-modal");
+        // } else {
+        //     self.openModal("thanks-modal");
+        // }
+    };
+
+    // xhr.ontimeout = function () {
+    //     self.openModal("bad-modal");
+    // }
+
+
 };
 
 document.addEventListener("DOMContentLoaded", ready);
