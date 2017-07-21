@@ -694,16 +694,16 @@ function ready() {
     xhr.onreadystatechange = function () {
         if (xhr.readyState != 4) return;
 
-        // if (xhr.status != 200) {
-        //     self.openModal("bad-modal");
-        // } else {
-        //     self.openModal("thanks-modal");
-        // }
+        if (xhr.status != 200) {
+            console.log('Error');
+        } else {
+            console.log(xhr);
+        }
     };
 
-    // xhr.ontimeout = function () {
-    //     self.openModal("bad-modal");
-    // }
+    xhr.ontimeout = function () {
+        console.log('Error');
+    }
 
 
 };
