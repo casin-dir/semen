@@ -674,11 +674,14 @@ Map.init = function () {
     self.searchControl.options.set('noPlacemark', true);
 
     self.userPlacemark = new ymaps.Placemark([55.76, 37.64], {}, {
-        iconLayout: 'default#image',
-        iconImageHref: '/static/icons/placemark.svg',
-        iconImageSize: [50, 50],
-        iconImageOffset: [-25, -50],
-        draggable: true
+        // iconLayout: 'default#image',
+        // iconImageHref: '/static/icons/placemark.svg',
+        // iconImageSize: [50, 50],
+        // iconImageOffset: [-25, -50],
+        draggable: true,
+
+        preset: 'islands#dotIcon',
+        iconColor: '#000000'
     });
 
     self.map.geoObjects.add(self.userPlacemark);
