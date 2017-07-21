@@ -25,11 +25,11 @@ class Order(Model):
     device = models.ForeignKey(Device, blank=True, null=True, default=None, verbose_name=u'Устройство')
     crashes = models.ManyToManyField(Crash, blank=True, verbose_name=u'Поломки')
     date = models.DateTimeField(null=True, blank=True, verbose_name=u'Дата и время заявки')
-    address = models.CharField(max_length=255, default=None, blank=True, verbose_name=u'Адрес клиента')
+    address = models.CharField(max_length=255, default=None, blank=True,null=True, verbose_name=u'Адрес клиента')
     phone = models.CharField(max_length=255, default=None, blank=True, verbose_name=u'Телефон клиента')
     name = models.CharField(max_length=255, default=None, blank=True, verbose_name=u'Имя клиента')
     # travel_time = models.IntegerField(default=0,verbose_name=u'Приблизительное время поезки(в минутах)')
-    total_cost = models.IntegerField(verbose_name='Общая сумма заказа')
+    total_cost = models.IntegerField(null=True,verbose_name='Общая сумма заказа')
     status = models.CharField(max_length=100, default='NEW', choices=STATUS, verbose_name='Статус')
     handled = models.BooleanField(default=False, editable=False)
 
