@@ -15,5 +15,4 @@ class UserToken(models.Model):
         verbose_name='Токен'
     )
 
-class Review(models.Model):
-    pass
+# class Review(models.Model):
