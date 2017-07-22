@@ -32,7 +32,7 @@ config = ConfigParser()
 config.read(config_path)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config.getboolean('common', 'DEBUG', fallback=True)
 
 ALLOWED_HOSTS = ['*']
 
@@ -154,3 +154,5 @@ Q_CLUSTER = {
     'bulk': 10,
     'orm': 'default'
 }
+
+STATIC_ROOT = '/opt/goodmaster/static/'
