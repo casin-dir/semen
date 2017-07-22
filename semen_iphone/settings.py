@@ -32,7 +32,7 @@ config = ConfigParser()
 config.read(config_path)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config.getboolean('common', 'DEBUG', fallback=True)
 
 ALLOWED_HOSTS = ['*']
 
@@ -97,7 +97,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'goodmaster',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': '',
         'HOST': '127.0.0.1',
         'PORT': 3306,
         'OPTIONS': {
@@ -154,3 +154,5 @@ Q_CLUSTER = {
     'bulk': 10,
     'orm': 'default'
 }
+
+STATIC_ROOT = '/opt/goodmaster/static/'
