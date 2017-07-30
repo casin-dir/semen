@@ -25,7 +25,7 @@ SECRET_KEY = 't=d($nb1xup53uunryhc3-bd8x4_@flwvy1x^uznm1%%i!8f(&'
 
 PLATFORM_CONFIG_NAME = "goodmaster.conf"
 
-production_config = os.path.join('/etc', 'analytics', PLATFORM_CONFIG_NAME)
+production_config = os.path.join('/etc', 'goodmaster', PLATFORM_CONFIG_NAME)
 development_config = os.path.join(BASE_DIR, PLATFORM_CONFIG_NAME)
 config_path = production_config if os.path.exists(production_config) else development_config
 config = ConfigParser()
