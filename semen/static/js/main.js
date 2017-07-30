@@ -560,7 +560,7 @@ UI.onOrder = function (isCallback) {
     }
 
     var clientPhone = isCallback ? this.html.clientPhoneCallback.value : this.html.clientPhone.value;
-    var phoneRe = /^[\+\d\ \(\)\-]+$/;
+    var phoneRe = /^[789][0-9]{10}$/;
     if (!phoneRe.test(clientPhone)) {
         error = true;
         if (isCallback) {
@@ -755,16 +755,16 @@ function ready() {
     } catch (e){
 
     }
-    MaskedInput({
-        elm: document.getElementById('client-phone'),
-        format: '+7 (___) ___-__-__',
-        separator: '+7 ()-'
-    });
-    MaskedInput({
-        elm: document.getElementById('client-phone-callback'),
-        format: '+7 (___) ___-__-__',
-        separator: '+7 ()-'
-    });
+    // MaskedInput({
+    //     elm: document.getElementById('client-phone'),
+    //     format: '+7 (___) ___-__-__',
+    //     separator: '+7 ()-'
+    // });
+    // MaskedInput({
+    //     elm: document.getElementById('client-phone-callback'),
+    //     format: '+7 (___) ___-__-__',
+    //     separator: '+7 ()-'
+    // });
 
     setTimeout(function(){ UI.pageState(true); }, 1000);
 };
