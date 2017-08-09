@@ -1029,10 +1029,11 @@ html, body{
 .modal-window__main-title{
     display: block;
     position: relative;
-    width: 100%;
+    width: calc(100% - 10rem);
     font-size: 1.7rem;
     font-weight: bold;
     text-align: center;
+    margin: 0 auto;
 }
 
 .modal-window__content{
@@ -1061,6 +1062,7 @@ html, body{
     transition: .2s opacity, .2s color, .2s background-color;
     opacity: .75;
     background-color: #fff;
+    margin-top: 5rem;
 }
 
 .modal-window__btn:hover{
@@ -1469,14 +1471,17 @@ html, body{
 }
 
 .mobile .modal-window__btn{
+    position: relative;
+    display: block;
     height: 6rem;
     margin-top: 3rem;
-    display: block;
     line-height: 6rem;
     border-radius: 2rem;
     padding-left: 2rem;
     padding-right: 2rem;
     font-size: 3rem;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .mobile .modal-window__close-btn{
@@ -1562,6 +1567,10 @@ html, body{
 
 .mobile .screen-4__feedback-text{
     font-size: 3rem;
+}
+
+.mobile .screen-2__crash-check{
+    display: none !important;
 }
 
 
