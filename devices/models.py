@@ -8,6 +8,7 @@ class Type(Model):
         verbose_name_plural = 'Типы'
 
     type = models.CharField(max_length=255, default=None, blank=True, verbose_name=u'Тип устройства')
+    active = models.BooleanField(default=False)
 
     def __str__(self):
         return '%s' % (self.type)

@@ -12,7 +12,7 @@ class DeviceAdmin(admin.ModelAdmin):
 
 
 class TypeAdmin(admin.ModelAdmin):
-    list_display = ('type',)
+    list_display = ('type','active')
     list_filter = ('type',)
 
 
