@@ -1062,7 +1062,7 @@ html, body{
     transition: .2s opacity, .2s color, .2s background-color;
     opacity: .75;
     background-color: #fff;
-    margin-top: 5rem;
+    /*margin-top: 5rem;*/
 }
 
 .modal-window__btn:hover{
@@ -1482,6 +1482,7 @@ html, body{
     font-size: 3rem;
     margin-left: auto;
     margin-right: auto;
+    max-width: calc(100% - 20rem);
 }
 
 .mobile .modal-window__close-btn{
