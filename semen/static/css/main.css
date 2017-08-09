@@ -840,26 +840,7 @@ html, body{
     margin: 0 auto;
     width: auto;
     margin-top: 2rem;
-}
-
-.screen-4__comments_side{
-    position: relative;
-    display: inline-block;
-    width: 50%;
-    vertical-align: top;
-    padding: 0;
-}
-
-.screen-4__comments_side:last-child{
-    margin-bottom: 0 !important;
-}
-
-.screen-4__comments_side_left{
-    padding-right: 1rem;
-}
-
-.screen-4__comments_side_right{
-    padding-left: 1rem;
+    max-width: 35rem;
 }
 
 
@@ -868,11 +849,11 @@ html, body{
 .screen-4__feedback{
     display: block;
     position: relative;
-    border-radius: 1rem;
+    border-radius: .5rem;
     background-color: #fff;
     border: 1px solid #ccc;
     overflow: hidden;
-    box-shadow: 0 0 .5rem rgba(0,0,0, .15);
+    box-shadow: 0 0 .1rem rgba(0,0,0, .1);
     margin-bottom: 2rem;
 }
 
@@ -895,9 +876,9 @@ html, body{
 
 .screen-4__feedback-user-avatar{
     display: inline-block;
-    height: 2.5rem;
-    width: 2.5rem;
-    border-radius: 2.5rem;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 2rem;
     overflow: hidden;
     background-color: #ccc;
     vertical-align: top;
@@ -910,10 +891,10 @@ html, body{
 .screen-4__feedback-user-name{
     display: inline-block;
     position: relative;
-    height: 2.5rem;
-    line-height: 2.5rem;
+    height: 2rem;
+    line-height: 2rem;
     font-weight: bold;
-    font-size: 1.1rem;
+    font-size: 1rem;
     text-align: left;
     margin-left: 1rem;
     vertical-align: top;
@@ -925,8 +906,8 @@ html, body{
     position: absolute;
     top: 1rem;
     right: 1rem;
-    height: 2.5rem;
-    width: 2.5rem;
+    height: 2rem;
+    width: 2rem;
     background-color: transparent;
     background-image: url('../images/social-icons/instagram_black.svg');
     background-position: center;
@@ -956,15 +937,15 @@ html, body{
     position: relative;
     height: auto;
     vertical-align: top;
-    margin-right: 1.5rem;
+    margin-right: 1.3rem;
     margin-bottom: .5rem;
 }
 
 .screen-4__feedback-param-logo{
     display: inline-block;
     position: relative;
-    height: 1.3rem;
-    width: 1.3rem;
+    height: 1.1rem;
+    width: 1.1rem;
     background-color: transparent;
     vertical-align: top;
     background-position: center;
@@ -983,11 +964,11 @@ html, body{
 .screen-4__feedback-param-text{
     display: inline-block;
     position: relative;
-    height: 1.3rem;
-    line-height: 1.3rem;
+    height: 1.2rem;
+    line-height: 1.2rem;
     margin-left: .5rem;
     vertical-align: top;
-    font-size: 1rem;
+    font-size: .9rem;
     font-weight: bold;
 }
 
@@ -1177,6 +1158,7 @@ html, body{
         width: 500px;
         padding: 0 !important;
         margin: 0 auto;
+
     }
 
     .instagram-media{
@@ -1465,16 +1447,7 @@ html, body{
     width: 100%;
     margin: 0 auto;
     margin-top: 5rem;
-}
-
-.mobile .screen-4__comments_side {
-    display: block;
-    width: 100%;
-    padding: 0;
-}
-
-.mobile .screen-4__comments_side{
-    width: 100% !important;
+    max-width: 100%;
 }
 
 .mobile .instagram-media{
@@ -1533,6 +1506,9 @@ html, body{
     border-radius: 0;
     box-shadow: none;
     margin-bottom: 5rem;
+    max-width: 100%;
+    border-left: none;
+    border-right: none;
 }
 
 .mobile .screen-4__feedback:hover{
