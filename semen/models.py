@@ -14,3 +14,43 @@ class UserToken(models.Model):
         default=None,
         verbose_name='Токен'
     )
+
+
+class FeedBack(models.Model):
+    class Meta:
+        verbose_name = 'отзыв'
+        verbose_name_plural = 'отзывы'
+
+    user_avatar = models.CharField(
+        max_length=255,
+        default='',
+        verbose_name='Ссылка на аватар человека'
+    )
+    feedback_link = models.CharField(
+        max_length=255,
+        default='',
+        verbose_name='Ссылка на отзыв'
+    )
+    feedback_image = models.CharField(
+        max_length=255,
+        default='',
+        verbose_name='Ссылка на картинку'
+    )
+    user_nickname = models.CharField(
+        max_length=255,
+        default='',
+        verbose_name='Никнейм'
+    )
+    feedback_likes = models.IntegerField(
+        default=100,
+        verbose_name='КОл-во лайков'
+    )
+    feedback_comments = models.IntegerField(
+        default=10,
+        verbose_name='Кол-во коментов'
+    )
+    feedback_text = models.CharField(
+        max_length=5000,
+        default='',
+        verbose_name='Текст отзыва'
+    )
