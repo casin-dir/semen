@@ -330,7 +330,7 @@
         <h3 class="screen-4__title">Отзывы</h3>
 
         <div class="screen-4__comments">
-
+            {% for feedback in feedbacks %}
             <!-- feedback elem    -->
             <div class="screen-4__feedback">
                 <div class="screen-4__feedback-header">
@@ -340,66 +340,32 @@
                     class="screen-4__feedback-user-link" 
                     >
                         <span class="screen-4__feedback-user-avatar"
-                        style="background-image: url('https://scontent-arn2-1.cdninstagram.com/t51.2885-19/s150x150/17494888_1773519252965418_3198388070030245888_a.jpg');"
+                        style="background-image: url('{{ feedback.user_avatar }}');"
                         ></span>
-                        <span class="screen-4__feedback-user-name">birukosha</span>
+                        <span class="screen-4__feedback-user-name">{{ feedback.user_nickname }}</span>
                     </a>
                     <span class="screen-4__feedback-logo"></span>
                 </div>
-                <a href="https://google.ru" target="_blank" class="screen-4__feedback-post-link">
-                    <img class="screen-4__feedback-photo" src="https://scontent-arn2-1.cdninstagram.com/t51.2885-15/sh0.08/e35/p640x640/19986038_272999516513940_1274992936244740096_n.jpg"></img>
+                <a href="{{ feedback.feedback_link }}" target="_blank" class="screen-4__feedback-post-link">
+                    <img class="screen-4__feedback-photo" src="{{ feedback.feedback_image }}"/>
                 </a>
                 <div class="screen-4__feedback-footer">
                     <div class="screen-4__feedback-param">
                         <span class="screen-4__feedback-param-logo screen-4__feedback-param-logo_like"></span>
-                        <span class="screen-4__feedback-param-text">125</span>
+                        <span class="screen-4__feedback-param-text">{{ feedback.feedback_likes }}</span>
                     </div>
                     <div class="screen-4__feedback-param">
                         <span class="screen-4__feedback-param-logo
                         screen-4__feedback-param-logo_comment"></span>
-                        <span class="screen-4__feedback-param-text">6</span>
+                        <span class="screen-4__feedback-param-text">{{ feedback.feedback_comments }}</span>
                     </div>
                     <p class="screen-4__feedback-text">
-                        Прилегла отдохнуть 😴
+                        {{ feedback.feedback_text }}
                     </p>
                 </div>
             </div>
             <!-- feedback elem    -->
-
-            <!-- feedback elem    -->
-            <div class="screen-4__feedback">
-                <div class="screen-4__feedback-header">
-                    <a 
-                    href="https://google.ru" 
-                    target="_blank"
-                    class="screen-4__feedback-user-link" 
-                    >
-                        <span class="screen-4__feedback-user-avatar"
-                        style="background-image: url('https://scontent-arn2-1.cdninstagram.com/t51.2885-19/s150x150/17494888_1773519252965418_3198388070030245888_a.jpg');"
-                        ></span>
-                        <span class="screen-4__feedback-user-name">birukosha</span>
-                    </a>
-                    <span class="screen-4__feedback-logo"></span>
-                </div>
-                <a href="https://google.ru" target="_blank" class="screen-4__feedback-post-link">
-                    <img class="screen-4__feedback-photo" src="https://scontent-arn2-1.cdninstagram.com/t51.2885-15/sh0.08/e35/p640x640/19986038_272999516513940_1274992936244740096_n.jpg"></img>
-                </a>
-                <div class="screen-4__feedback-footer">
-                    <div class="screen-4__feedback-param">
-                        <span class="screen-4__feedback-param-logo screen-4__feedback-param-logo_like"></span>
-                        <span class="screen-4__feedback-param-text">125</span>
-                    </div>
-                    <div class="screen-4__feedback-param">
-                        <span class="screen-4__feedback-param-logo
-                        screen-4__feedback-param-logo_comment"></span>
-                        <span class="screen-4__feedback-param-text">6</span>
-                    </div>
-                    <p class="screen-4__feedback-text">
-                        Прилегла отдохнуть 😴
-                    </p>
-                </div>
-            </div>
-            <!-- feedback elem    -->
+            {% endfor %}
             
         </div>
     </div>

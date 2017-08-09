@@ -13,7 +13,7 @@ from django.views import View
 from crashes.models import Crash
 from devices.models import Device, Type
 from orders.models import Order
-from semen.models import UserToken
+from semen.models import UserToken, FeedBack
 from semen.utils import send_push, total_cost, total_time, get_map, total
 from semen_iphone import settings
 
@@ -21,6 +21,7 @@ from semen_iphone import settings
 class Landing(View):
     def get(self, request):
         context = {'list': [],
+                   'feedbacks': FeedBack.objects.all(),
                    'isLoggedIn': True if self.request.user.is_authenticated else False
                    }
         Device.objects.all()
@@ -29,7 +30,8 @@ class Landing(View):
         for type in types:
             context['list'].append(
                 {'type': type,
-                 'models': []}
+                 'models': []
+                 }
             )
 
         for con in context['list']:
