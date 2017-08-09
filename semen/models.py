@@ -26,6 +26,11 @@ class FeedBack(models.Model):
         default='',
         verbose_name='Ссылка на аватар человека'
     )
+    user_link = models.CharField(
+        max_length=255,
+        default='',
+        verbose_name='Ссылка на аккаунт человека'
+    )
     feedback_link = models.CharField(
         max_length=255,
         default='',
