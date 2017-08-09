@@ -117,12 +117,14 @@
 
         <div class="screen-1__social">
             <a href="https://vk.com/gm_remont" class="screen-1__social-link" 
-            id="screen-1__social-vk"></a>
+            id="screen-1__social-vk" 
+            target="_blank"></a>
             <!-- <a href="" class="screen-1__social-link"
             id="screen-1__social-telegram"
             ></a> -->
             <a href="https://www.instagram.com/goodmaster.moscow/" class="screen-1__social-link"
             id="screen-1__social-instagram"
+            target="_blank"
             ></a>
         </div>
     </div>
@@ -141,7 +143,7 @@
             <div class="screen-2__devices-types">
                 {% for item in list %}
                     <div 
-                        class="screen-2__device-type" 
+                        class="screen-2__device-type screen-2__device-type{{ item.active }}" 
                         device-type-btn="{{ item.type.id }}"
                     >
                         <div 
@@ -410,7 +412,7 @@
             <input id="client-phone-callback" type="text" class="text-input__input">
         </div>
     </div>
-    <div class="modal-window__btn" onclick="UI.onOrder(true)" style="max-width: calc(100% - 20rem);">Перезвоните мне</div>
+    <div class="modal-window__btn" onclick="UI.onOrder(true)">Перезвоните мне</div>
 </div>
 
 <div id="__global-loader__">
