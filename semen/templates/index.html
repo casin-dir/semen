@@ -2,8 +2,52 @@
 {% load staticfiles %}
 {% static "images/devices_types" as prepath %}
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru-RU">
 <head>
+
+    <meta http-equiv="Content-Type" content="type;" charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <link href="{% static 'favicons/sharing.jpg' %}" rel="image_src">
+    <meta property="vk:image" content="{% static 'favicons/sharing.jpg' %}">
+
+    <meta property="og:url" content="https://goodmaster.moscow/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Good Master - дешевый ремонт техники Apple">
+    <meta property="og:description" content="Выездной ремонт техники Apple. Дома, в офисе, в кафе. С 10:00 и до 22:00.">
+    <meta property="og:image" content="{% static 'favicons/sharing.jpg' %}">
+    <meta property="og:site_name" content="Good Master">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:image:width" content="537">
+    <meta property="og:image:height" content="240">
+
+    <meta name="Description" content="Выездной ремонт техники Apple. Дома, в офисе, в кафе. С 10:00 и до 22:00.">
+    <meta name="Keywords" content="Выездной ремонт Ремонт Айфон iPhone Apple Эпл Эппл Дешево Москва">
+
+    <!-- favicons -->
+    <link rel="apple-touch-icon" sizes="57x57" href="{% static 'favicons/apple-touch-icon-57x57.png' %}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{% static 'favicons/apple-touch-icon-60x60.png' %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'favicons/apple-touch-icon-72x72.png' %}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'favicons/apple-touch-icon-76x76.png' %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'favicons/apple-touch-icon-114x114.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'favicons/apple-touch-icon-120x120.png' %}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'favicons/apple-touch-icon-144x144.png' %}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'favicons/apple-touch-icon-152x152.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicons/apple-touch-icon-180x180.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicons/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="194x194" href="{% static 'favicons/favicon-194x194.png' %}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{% static 'favicons/android-chrome-192x192.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicons/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'favicons/manifest.json' %}">
+    <link rel="mask-icon" href="{% static 'favicons/safari-pinned-tab.svg' %}" color="#5bbad5">
+    <meta name="apple-mobile-web-app-title" content="GoodMaster">
+    <meta name="application-name" content="GoodMaster">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="{% static 'favicons/mstile-144x144.png' %}">
+    <meta name="theme-color" content="#ffffff">
+    <!-- favicons -->
+
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta charset="UTF-8">
     <title>Good Master</title>
@@ -72,12 +116,12 @@
         </div>
 
         <div class="screen-1__social">
-            <a href="" class="screen-1__social-link" 
+            <a href="https://vk.com/gm_remont" class="screen-1__social-link" 
             id="screen-1__social-vk"></a>
-            <a href="" class="screen-1__social-link"
+            <!-- <a href="" class="screen-1__social-link"
             id="screen-1__social-telegram"
-            ></a>
-            <a href="" class="screen-1__social-link"
+            ></a> -->
+            <a href="https://www.instagram.com/goodmaster.moscow/" class="screen-1__social-link"
             id="screen-1__social-instagram"
             ></a>
         </div>
@@ -366,7 +410,7 @@
             <input id="client-phone-callback" type="text" class="text-input__input">
         </div>
     </div>
-    <div class="modal-window__btn" onclick="UI.onOrder(true)" style="margin-top: 0;">Перезвоните мне</div>
+    <div class="modal-window__btn" onclick="UI.onOrder(true)" style="max-width: calc(100% - 20rem);">Перезвоните мне</div>
 </div>
 
 <div id="__global-loader__">
