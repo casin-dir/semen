@@ -361,6 +361,11 @@ UI.onSelectType = function (typeBlock) {
     self.resetCurrentCrashes(true);
 
     self.html.currentType = typeBlock;
+
+    if(self.html.currentType.classList.contains('screen-2__device-typeFalse')){
+        return;
+    }
+
     self.html.currentType.classList.add(self.activeTypeClass);
 
     self.data.device.type = typeBlock.getAttribute('device-type-btn');
@@ -767,8 +772,17 @@ function ready() {
     // });
 
     setTimeout(function(){ UI.pageState(true); }, 1000);
+
+    // screen-2__device-typeFalse
 };
 
 document.addEventListener("DOMContentLoaded", ready);
+
+
+
+
+
+
+
 
 
