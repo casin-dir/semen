@@ -1,4 +1,6 @@
 from django.contrib.auth.models import User
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import get_template
 from django_q.tasks import async
 
 from crashes.models import Crash
@@ -81,3 +83,28 @@ def get_map(coords):
         return '/map?coord1={}&coord2={}'.format(coords[0],coords[1])
     else:
         return 'Не указано'
+
+
+def send_mails(template_name, context_dict=None, **kwargs):
+    to = kwargs.get('to')
+    bcc = kwargs.get('bcc')
+
+    recipients = [to] if isinstance(to, str) else to
+    recipients_bcc = [bcc] if isinstance(bcc, str) else bcc
+
+    from_email = settings.EMAIL_HOST_USER
+
+    template = get_template(template_name)
+    context = context_dict or {}
+
+    html = template.render(context)
+
+    message = EmailMultiAlternatives(
+        kwargs.get('subject'),
+        from_email=from_email,
+        to=recipients,
+        bcc=recipients_bcc
+    )
+
+    message.attach_alternative(html, 'text/html')
+    message.send()

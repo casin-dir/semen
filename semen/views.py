@@ -14,7 +14,7 @@ from crashes.models import Crash
 from devices.models import Device, Type
 from orders.models import Order
 from semen.models import UserToken, FeedBack
-from semen.utils import send_push, total_cost, total_time, get_map, total
+from semen.utils import send_push, total_cost, total_time, get_map, total, send_mails
 from semen_iphone import settings
 
 
@@ -86,6 +86,14 @@ class NewOrder(View):
 
         )
         order.save()
+
+        for user in User.objects.all():
+            send_mails(
+                'neworder.html',
+                {'instance':order},
+                to=str(user.email),
+                subject='GM - Новый заказ'
+                )
         text = ', '.join(str(e) for e in crashes)
         for user in User.objects.filter(is_superuser=True):
             send_push(user, 'Новая заявка - {}'.format(data['name']), '{}, {}'.format(crashes[0].device, text),

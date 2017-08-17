@@ -156,3 +156,10 @@ Q_CLUSTER = {
 }
 
 STATIC_ROOT = '/opt/goodmaster/static/'
+
+EMAIL_HOST = config.get('smtp', 'EMAIL_HOST', fallback='127.0.0.1')
+EMAIL_HOST_USER = config.get('smtp', 'EMAIL_HOST_USER', fallback='')
+EMAIL_HOST_PASSWORD = config.get('smtp', 'EMAIL_HOST_PASSWORD', fallback='')
+EMAIL_PORT = config.get('smtp', 'EMAIL_PORT', fallback=1025)
+EMAIL_USE_TLS = config.get('smtp', 'EMAIL_USE_TLS', fallback=False)
+EMAILS = config.get('smtp', 'EMAILS', fallback='')
