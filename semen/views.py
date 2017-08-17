@@ -88,9 +88,11 @@ class NewOrder(View):
         order.save()
 
         for user in User.objects.all():
+            crashes_str = [crash.name for crash in crashes]
             send_mails(
                 'neworder.html',
-                {'instance':order},
+                {'instance':order,
+                 'crashes': ','.join(crashes_str)},
                 to=str(user.email),
                 subject='GM - Новый заказ'
                 )

@@ -1,11 +1,11 @@
 {% extends '_base.html' %}
 
 {% block content %}
-    <h1 align="center">Новая заявка с сайта</h1>
-    <h1>Заказ: {{ instance }}</h1>
+    <h1 align="center">Новый заказ!!!</h1>
     <h1>Клиент: {{ instance.name }}</h1>
-    <h1>Email: {{ instance.email }}</h1>
     <h1>Телефон: {{ instance.phone }}</h1>
-    <h1>Цена: {% if instance.price_from %}от {{ instance.price_from }} до {% endif %} {{ instance.price_to }}</h1>
-    <h1>Описание: {{ instance.description }}</h1>
+    <h1>Модель: {{ instance.device }}</h1>
+    <h1>Поломки: {{ crashes }}</h1>
+    <h1>Цена: {{ instance.total_cost }}</h1>
+    <h1>Адрес: Надо спросить</h1>
 {% endblock %}
